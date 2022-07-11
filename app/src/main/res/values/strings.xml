@@ -9,4 +9,18 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string-array name="community_array">
+        <item>Enterprise.Net</item>
+        <item>Full-stack Web</item>
+        <item>Quality Engineer</item>
+        <item>Cloud and DevOps</item>
+        <item>Big Data and Analytics</item>
+        <item>Product Delivery</item>
+        <item>Enterprise Coffee</item>
+        <item>Mobile</item>
+        <item>Research and Development</item>
+    </string-array>
+
+
 </resources>
