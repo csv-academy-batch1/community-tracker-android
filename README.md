@@ -21,11 +21,13 @@ First, clone the repo:
 
 ## Running the Sample App
 
-* Connect an Android device to your development machine.
-* Or via Android Emulator in Android Studio
+1 Connect an Android device to your development machine (Recommended)
+2 Run an Android Emulator in Android Studio
 
 ### Android Studio
 
+* Create an Android Emulator in Android Studio using this [guide](https://developer.android.com/studio/run/managing-avds#createavd)
+* Select preferred device, either actual physical device or emulator
 * Select `Run -> Run 'app'` (or `Debug 'app'`) from the menu bar
 * Select the device you wish to run the app on and click 'OK'
 
