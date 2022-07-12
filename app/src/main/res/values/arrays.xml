@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="communities_arrays">
+        <item>Baron Paredes</item>
+        <item>Lloyd Miguel</item>
+        <item>Gilbert Morales</item>
+        <item>Zack Zabala</item>
+        <item>Rennor Galicia</item>
+    </string-array>
+</resources>

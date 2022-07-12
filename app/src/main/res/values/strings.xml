@@ -9,4 +9,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="community_input_page">Community Input Page.</string>
+    <string name="community_description">Community Description</string>
+    <string name="name_of_community">Name of Community</string>
+    <string name="save">SAVE</string>
+    <string name="community_assigned_to">Community Assigned To</string>
 </resources>
