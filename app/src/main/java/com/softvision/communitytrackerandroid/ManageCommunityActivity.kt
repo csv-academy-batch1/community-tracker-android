@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
 import com.softvision.communitytrackerandroid.databinding.ActivityManageCommunityBinding
 
+// TODO Add Retrofit SDK dependencies and initial source code
 class ManageCommunityActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityManageCommunityBinding
@@ -21,21 +22,25 @@ class ManageCommunityActivity : AppCompatActivity() {
         binding = ActivityManageCommunityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val spinner: Spinner = findViewById(R.id.spinner)
-        ArrayAdapter.createFromResource(
-            this@ManageCommunityActivity,
-            R.array.communities_arrays,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
+        with(binding) {
+            // TODO Spinner or dropdown using dynamic array list (Create Data Class/ Model for Managers)
+            val communityManager = arrayOf("Baron Paredes", "Lloyd Miguel")
+
+            ArrayAdapter.createFromResource(
+                this@ManageCommunityActivity,
+                R.array.communities_arrays,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                spinner.adapter = adapter
+                binding.spinner.adapter = adapter
             }
 
-        with(binding) {
             ivLogo.visibility = View.VISIBLE
 
             btsave.setOnClickListener {
+                // TODO Create Data Class/ Model for Community
                 val test = spinner.selectedItem.toString()
+
                 val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
                     AlertDialog.Builder(it)
                 }
@@ -43,6 +48,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                 builder?.setTitle("Community Name is: ${editTextNameOfCommunity.text.toString()}")
                     ?.setMessage("Assigned To: $test\nCommunity Description: ${editDescriptionOfCommunity.text.toString()}")
                 val dialog: AlertDialog? = builder?.create()
+
                 dialog?.show()
             }
         }
