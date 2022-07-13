@@ -62,18 +62,18 @@
     <EditText
         android:id="@+id/etCommunityDescription"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="219dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/rounded_border"
         android:gravity="start|top"
         android:hint="Community Description"
+        android:padding="10dp"
         android:textColor="#808080"
         android:textSize="15sp"
-        android:textStyle="bold"
-        android:padding="10dp"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonSave"

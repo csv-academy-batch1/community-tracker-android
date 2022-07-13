@@ -25,23 +25,20 @@ class ManageCommunityActivity : AppCompatActivity() {
 
         with(binding) {
 
-            val communityManagers = arrayListOf<String>()
+            var communityManagers = arrayListOf<String>()
             arrayListOf("Baron Patrick Paredes")
             arrayListOf("Gilberto Bernardo Morales")
             arrayListOf("Lloyd Joseph Miguel")
             arrayListOf("Rennor Galicia")
             arrayListOf("Zack Zabala")
 
-            val adapter = ArrayAdapter (
-                this@ManageCommunityActivity,
-                android.R.layout.simple_spinner_item,
-                communityManagers
-            )
+            val adapter = ArrayAdapter (this@ManageCommunityActivity, android.R.layout.simple_spinner_item, communityManagers)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spcommunity.adapter = adapter
+            spcommunity.adapter = adapter
+
             buttonSave.setOnClickListener {
 
-                val communityManager = spcommunity.selectedItem.toString()
+                val communityManagers = spcommunity.selectedItem.toString()
                 val communityName = etNameOfCommunity.text.toString()
                 val communityDescription = etCommunityDescription.text.toString()
 
@@ -49,8 +46,8 @@ class ManageCommunityActivity : AppCompatActivity() {
                     AlertDialog.Builder(it)
 
                 }
-                builder?.setTitle("Community")
-                    ?.setMessage("Assigned To: $communityManager.\n\n\n Description: ${etCommunityDescription.text.toString()}")
+                builder?.setTitle("Community Name: $communityManagers")
+                    ?.setMessage("Assigned To: $communityManagers.\n\n\n Description: ${etCommunityDescription.text.toString()}")
 
                 val dialog: AlertDialog? = builder?.create()
                 dialog?.show()
