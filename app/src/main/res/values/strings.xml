@@ -23,4 +23,7 @@
     </string-array>
 
 
+    <string name="community_input_page">Community Input Page.</string>
+    <string name="community_description">Community Description</string>
+    <string name="save">SAVE</string>
 </resources>

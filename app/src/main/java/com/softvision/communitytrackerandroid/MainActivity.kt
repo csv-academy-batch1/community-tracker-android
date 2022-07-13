@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
 
+// TODO Remove First and Second Fragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
