@@ -13,5 +13,20 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+
     }
+
+//    @Test
+//    fun communityValidator_validCommunity_returnTrue() {
+//        val community = Community(name = "", description = "")
+//
+//        assertTrue(CommunityValidator.validateCommunity(community))
+//    }
+//
+//    @Test
+//    fun communityValidator_validCommunity_returnTrue() {
+//        val community = Community(name = "Mobile", description ="android and ios developer")
+//
+//        assertTrue(CommunityValidator.validateCommunity(community))
+//    }
 }

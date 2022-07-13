@@ -11,55 +11,62 @@ import com.softvision.communitytrackerandroid.databinding.ActivityManageCommunit
 class ManageCommunityActivity : AppCompatActivity() {
 
     lateinit var community: Spinner
-   // lateinit var result: TextView
+
 
     private lateinit var binding: ActivityManageCommunityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+      //  setContentView(R.layout.activity_manage_community)
+
         binding = ActivityManageCommunityBinding.inflate(layoutInflater)
-
-
         setContentView(binding.root)
 
-        community = findViewById(R.id.spcommunity) as Spinner
-        //result = findViewById(R.id.tv_result) as TextView
+        //community = findViewById(R.id.spcommunity) as Spinner
+        with(binding) {
 
-        // val communities = arrayOf("Enterprise.Net", "Full-stack Web", "Quality Engineer", "Cloud and DevOps", "Big Data and Analytics",
-        // "Product Delivery", "Enterprise Coffee", "Mobile", "Research and Developmen")
+            val communityManagers = arrayListOf<String>()
+            arrayListOf("Baron Patrick Paredes")
+            arrayListOf("Gilberto Bernardo Morales")
+            arrayListOf("Lloyd Joseph Miguel")
+            arrayListOf("Rennor Galicia")
+            arrayListOf("Zack Zabala")
 
-//        val spinner : Spinner = findViewById(R.id.spinner)
-//        ArrayAdapter.createFromResource(
+        }
+
+        val adapter = ArrayAdapter (
+            this@ManageCommunityActivity,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spcommunity.adapter = adapter
+        }
+//        val adapter = ArrayAdapter.createFromResource(
 //            this@ManageCommunityActivity,
 //            R.array.community_array,
-//            R.layout.custom_simple_spinner_item
-//        ).also { adapter ->
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            spinner.adapter = adapter
-//        }
-        val adapter = ArrayAdapter.createFromResource(
-            this@ManageCommunityActivity,
-            R.array.community_array,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spcommunity.adapter = adapter
+//            android.R.layout.simple_spinner_item
+//        )
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        binding.spcommunity.adapter = adapter
 
 
-        with(binding) {
-            val spinner = spcommunity.selectedItem.toString()
-            button.setOnClickListener{
+//        with(binding) {
+//           val spinner = spcommunity.selectedItem.toString()
+            buttonSave.setOnClickListener {
+
+                val communityManager = spcommunity.selectedItem.toString()
+                val communityName = etNameOfCommunity.text.toString()
+                val communityDescription = etCommunityDescription.text.toString()
+
                 val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
                     AlertDialog.Builder(it)
 
                 }
-                builder?.setTitle("Community Name Saved: ${etNameOfCommunity.text.toString()}")
+                builder?.setTitle("Community")
                     ?.setMessage("Assigned To: $spinner.\n\n\n Description: ${etCommunityDescription.text.toString()}")
 
                 val dialog: AlertDialog? = builder?.create()
                 dialog?.show()
-            }
-
             }
         }
     }
