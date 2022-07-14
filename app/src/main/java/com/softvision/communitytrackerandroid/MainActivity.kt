@@ -12,7 +12,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
 
-// TODO Remove First and Second Fragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -21,19 +20,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
         binding.fab.setOnClickListener { view ->
-            val intent = Intent(this@MainActivity, ManageCommunityActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this@MainActivity, ManageCommunityActivity::class.java))
         }
     }
 
@@ -53,9 +46,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
 }
+
