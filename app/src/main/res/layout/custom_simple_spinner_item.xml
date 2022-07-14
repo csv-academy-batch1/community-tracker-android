@@ -8,8 +8,8 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:textAlignment="inherit"
-    android:background="@drawable/rounded_border"
+    android:background="@drawable/bg_spinner"
     android:layout_margin="10dp"
-    android:padding="10dp">
+    android:padding="15dp">
 
 </TextView>
