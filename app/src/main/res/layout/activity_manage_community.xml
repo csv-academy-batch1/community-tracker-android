@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ManageCommunityActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="370dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:src="@drawable/cognizant_logo"
+            android:layout_weight=".30"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:padding="10dp"
+            android:hint="@string/community_input_page"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#9FAFC1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_weight=".10"/>
+
+        <EditText
+            android:id="@+id/editTextNameOfCommunity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_border"
+            android:ems="10"
+            android:hint="@string/name_of_community"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_weight=".05"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:padding="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight=".1"/>
+
+        <EditText
+            android:id="@+id/editDescriptionOfCommunity"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_border"
+            android:ems="10"
+            android:hint="@string/community_description"
+            android:gravity="start|top"
+            android:padding="10dp"
+            android:layout_weight=".40"/>
+
+        <Button
+            android:id="@+id/btsave"
+            android:layout_width="100dp"
+            android:layout_height="58dp"
+            android:layout_gravity="center"
+            android:backgroundTint="#29323D"
+            android:padding="12dp"
+            android:text="@string/save"
+            android:textStyle="bold"
+            android:layout_marginStart="150dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight=".05"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
