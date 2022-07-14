@@ -10,7 +10,6 @@
     android:textAlignment="inherit"
     android:background="@drawable/bg_spinner"
     android:layout_margin="10dp"
-    android:padding="15dp"
-    android:textColor="#9c9b9b">
+    android:padding="15dp">
 
 </TextView>

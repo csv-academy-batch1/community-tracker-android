@@ -1,9 +1,8 @@
-package com.softvision.communitytrackerandroid.Data
+package com.softvision.communitytrackerandroid.data
 
 object DataObject {
 
     var managerList = listOf(
-        Member("Community Assigned To"),
         Member("Baron Paredes"),
         Member("Lloyd Miguel"),
         Member("Zack Zabala"),

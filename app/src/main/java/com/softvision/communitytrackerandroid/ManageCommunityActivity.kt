@@ -2,16 +2,18 @@ package com.softvision.communitytrackerandroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
+import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.softvision.communitytrackerandroid.Data.Community
-import com.softvision.communitytrackerandroid.Data.DataObject
-import com.softvision.communitytrackerandroid.Data.Member
+import androidx.lifecycle.lifecycleScope
+import com.softvision.communitytrackerandroid.data.Community
+import com.softvision.communitytrackerandroid.data.DataObject
+import com.softvision.communitytrackerandroid.data.Member
+import com.softvision.communitytrackerandroid.data.api.ApiInterface
 import com.softvision.communitytrackerandroid.databinding.ActivityManageCommunityBinding
+import tayabas.anthony.retrofitsample.data.api.RetrofitClient
 
-// TODO Add Retrofit SDK dependencies and initial source code
 class ManageCommunityActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityManageCommunityBinding
@@ -23,36 +25,22 @@ class ManageCommunityActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding) {
-            // TODO Spinner or dropdown using dynamic array list (Create Data Class/ Model for Managers)
             val communityManager = DataObject.getAllData()
             val  adapter = ArrayAdapter(this@ManageCommunityActivity,R.layout.custom_simple_spinner_item, communityManager)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
-//            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(
-//                    parent: AdapterView<*>?,
-//                    view: View?,
-//                    position: Int,
-//                    id: Long
-//                ) {
-//
-//                }
-//
-//                override fun onNothingSelected(parent: AdapterView<*>?) {
-//
-//                }
-//
-//            }
-
 
             btsave.setOnClickListener {
-                // TODO Create Data Class/ Model for Community
                 val communityName = editTextNameOfCommunity.text.toString()
                 val managerName = spinner.selectedItem.toString()
                 val description = editDescriptionOfCommunity.text.toString()
-                val manager = Member(managerName)
-                val community = Community(name = communityName, manager = manager, description = description)
+                // val manager = Member(managerName)
+                val community = Community(name = communityName, manager = managerName, description = description)
 
+                // TODO Community Validation
+                addCommunity(community)
+
+                // If invalid
                 val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
                     AlertDialog.Builder(it)
                 }
@@ -64,5 +52,37 @@ class ManageCommunityActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun addCommunity(community: Community) {
+        var retrofit = RetrofitClient.getInstance()
+        var apiInterface = retrofit.create(ApiInterface::class.java)
+
+        lifecycleScope.launchWhenCreated {
+            try {
+                val response = apiInterface.addCommunity(community)
+                if (response.isSuccessful()) {
+                    val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
+                        AlertDialog.Builder(it)
+                    }
+
+                    builder?.setTitle("Create Community")
+                        ?.setMessage("Successful")
+                    val dialog: AlertDialog? = builder?.create()
+                    dialog?.setOnDismissListener {
+                        // finish()
+                    }
+                    dialog?.show()
+                } else {
+                    Toast.makeText(
+                        this@ManageCommunityActivity,
+                        response.errorBody().toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }catch (Ex:Exception){
+                Log.e("Error",Ex.localizedMessage)
+            }
+        }
     }
 }

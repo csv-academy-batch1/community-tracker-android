@@ -5,7 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object Retrofit {
+object RetrofitClient {
     fun getInstance(): Retrofit {
         var mHttpLoggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -17,7 +17,7 @@ object Retrofit {
 
 
         var retrofit: Retrofit = retrofit2.Retrofit.Builder()
-            .baseUrl("https://reqres.in")
+            .baseUrl("https://csvacademy-softvision.in")
             .addConverterFactory(GsonConverterFactory.create())
             .client(mOkHttpClient)
             .build()
