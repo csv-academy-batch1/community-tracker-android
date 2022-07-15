@@ -2,7 +2,8 @@ package com.softvision.communitytrackerandroid.data
 
 object DataObject {
 
-    var managerList = listOf(
+    var managerList = arrayOf(
+        Member("Community Assigned To"),
         Member("Baron Paredes"),
         Member("Lloyd Miguel"),
         Member("Zack Zabala"),
@@ -11,8 +12,11 @@ object DataObject {
     )
 
 
-    fun getAllData(): List<Member> {
-
-        return managerList
+    fun getAllData(): List<String> {
+        val list = mutableListOf<String>()
+        for (member in managerList) {
+            list.add(member.managerData)
+        }
+        return list
     }
 }

@@ -1,9 +1,14 @@
 package com.softvision.communitytrackerandroid
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -49,20 +54,66 @@ class ManageCommunityActivity : AppCompatActivity() {
                 val communityDescription = etCommunityDescription.text.toString()
 =======
             val communityManager = DataObject.getAllData()
-            val  adapter = ArrayAdapter(this@ManageCommunityActivity,R.layout.custom_simple_spinner_item, communityManager)
+            val adapter = object: ArrayAdapter<String>(
+                this@ManageCommunityActivity,
+                R.layout.custom_simple_spinner_item,
+                communityManager)
+            {
+                override fun isEnabled(position: Int): Boolean {
+                    // Disable the first item from Spinner
+                    // First item will be used for hint
+                    return position != 0
+                }
+
+                override fun getDropDownView(
+                    position: Int,
+                    convertView: View?,
+                    parent: ViewGroup
+                ): View {
+                    val view: TextView =
+                        super.getDropDownView(position, convertView, parent) as TextView
+                    // set the color of first item in the drop down list to gray
+                    if (position == 0) {
+                        view.setTextColor(Color.GRAY)
+                    } else {
+                        // here it is possible to define color for other items by
+                        // view.setTextColor(Color.RED)
+                    }
+                    return view
+                }
+            }
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
+            spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val value = parent!!.getItemAtPosition(position).toString()
+                    if (value.equals(communityManager[0])) {
+                        (view as TextView).setTextColor(Color.GRAY)
+                    }
+                }
+            }
 
             btsave.setOnClickListener {
                 val communityName = editTextNameOfCommunity.text.toString()
-                val managerName = spinner.selectedItem.toString()
+                var managerName = spinner.selectedItem.toString()
+                if (managerName.equals(communityManager[0])) {
+                    managerName = ""
+                }
                 val description = editDescriptionOfCommunity.text.toString()
                 // val manager = Member(managerName)
                 val community = Community(name = communityName, manager = managerName, description = description)
 >>>>>>> 235c1b741b6d016cc9fd32109ef8dfab90f98b9c
 
                 // TODO Community Validation
-                addCommunity(community)
+                // addCommunity(community)
 
                 // If invalid
                 val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
@@ -75,8 +126,12 @@ class ManageCommunityActivity : AppCompatActivity() {
 <<<<<<< HEAD
 =======
                 builder?.setTitle("Community")
+<<<<<<< HEAD
                     ?.setMessage("Community Name: ${community.name}\nCommunity Assigned To: ${community.manager}\n\nCommunity Description: ${community.description}\n")
 >>>>>>> 235c1b741b6d016cc9fd32109ef8dfab90f98b9c
+=======
+                    ?.setMessage("Community Name: ${community.name}\nCommunity Assigned To: ${community.manager}\nCommunity Description: ${community.description}\n")
+>>>>>>> c89cb17242029a6c745aa8bf5a76d61ebed15fae
                 val dialog: AlertDialog? = builder?.create()
                 dialog?.show()
             }

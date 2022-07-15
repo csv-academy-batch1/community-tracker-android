@@ -16,3 +16,8 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    coreVersion = "1.5.0-alpha01"
+    runnerVersion = "1.5.0-alpha04"
+}
