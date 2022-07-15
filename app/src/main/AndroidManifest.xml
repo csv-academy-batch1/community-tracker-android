@@ -14,10 +14,12 @@
             android:exported="true"
             android:theme="@style/Theme.SoftvisionCommunityTracker.NoActionBar"
             android:windowSoftInputMode="adjustPan">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 235c1b741b6d016cc9fd32109ef8dfab90f98b9c
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

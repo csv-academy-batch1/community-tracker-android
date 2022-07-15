@@ -8,7 +8,13 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:textAlignment="inherit"
+<<<<<<< HEAD
     android:background="@drawable/edit_text_background"
     android:layout_margin="10dp">
+=======
+    android:background="@drawable/bg_spinner"
+    android:layout_margin="10dp"
+    android:padding="15dp">
+>>>>>>> 235c1b741b6d016cc9fd32109ef8dfab90f98b9c
 
 </TextView>
