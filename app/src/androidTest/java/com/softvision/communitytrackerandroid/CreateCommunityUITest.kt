@@ -73,17 +73,18 @@ class CreateCommunityUITest {
 
         onView(withId(R.id.alertTitle))
             .inRoot(isDialog())
-            .check(matches(withText("Community")))
+            .check(matches(withText(R.string.community_Title)))
             .check(matches(isDisplayed()));
 
         onView(withId(android.R.id.message))
             .inRoot(isDialog())
-            .check(matches(withText("Community Name: Mobile\nCommunity Assigned To: Baron Paredes\nCommunity Description: Community for Mobile and cross-platform developers\n")))
+            .check(matches(withText("Community Name: $STRING_TO_BE_TYPED_IN_NAME\nCommunity Assigned To: $STRING_TO_BE_SELECTED\nCommunity Description: $STRING_TO_BE_TYPED_IN_DESCRIPTION\n")))
             .check(matches(isDisplayed()));
     }
 
     companion object {
         val STRING_TO_BE_TYPED_IN_NAME = "Coffee"
         val STRING_TO_BE_TYPED_IN_DESCRIPTION = "Community for Mobile and cross-platform developers"
+        val STRING_TO_BE_SELECTED = DataObject.getAllData()[1]
     }
 }
