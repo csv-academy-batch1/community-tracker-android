@@ -10,23 +10,55 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.softvision.communitytrackerandroid.Adampter.ListCommunityAdapter
+import com.softvision.communitytrackerandroid.data.SampleListCommunity
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    public val ACTION_ADD_COMMUNITY: Int = 1
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        var listOfCommunity = listOf(
+            SampleListCommunity("Mobile Cross Platform"),
+            SampleListCommunity("Enterprise.Net"),
+            SampleListCommunity("Quality Engineering"),
+            SampleListCommunity("Full-Stack Web"),
+            SampleListCommunity("Product Delivery"),
+            SampleListCommunity("Cloud and DevOps"),
+            SampleListCommunity("Product Delivery"),
+            SampleListCommunity("Cloud and DevOps")
+        )
+        with(binding) {
+            val recyclerView = findViewById<RecyclerView>(R.id.rvListCommunity)
+            val listCommunityAdapter = ListCommunityAdapter(listOfCommunity)
+
+            recyclerView.apply {
+                adapter = listCommunityAdapter
+                layoutManager = GridLayoutManager(this@MainActivity, 2)
+                setHasFixedSize(true)
+            }
+        }
 
         binding.fab.setOnClickListener { view ->
-            startActivity(Intent(this@MainActivity, ManageCommunityActivity::class.java))
+            startActivityForResult(Intent(this@MainActivity, ManageCommunityActivity::class.java), ACTION_ADD_COMMUNITY)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ACTION_ADD_COMMUNITY) {
+            if (resultCode == RESULT_OK) {
+
+            }
         }
     }
 

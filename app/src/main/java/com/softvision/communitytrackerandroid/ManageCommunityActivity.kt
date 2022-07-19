@@ -33,7 +33,7 @@ class ManageCommunityActivity : AppCompatActivity() {
             val communityManager = DataObject.getAllData()
             val adapter = object: ArrayAdapter<String>(
                 this@ManageCommunityActivity,
-                R.layout.custom_simple_spinner_item,
+                android.R.layout.simple_spinner_dropdown_item,
                 communityManager)
             {
                 override fun isEnabled(position: Int): Boolean {
@@ -74,22 +74,46 @@ class ManageCommunityActivity : AppCompatActivity() {
                     val value = parent!!.getItemAtPosition(position).toString()
                     if (value.equals(communityManager[0])) {
                         (view as TextView).setTextColor(Color.GRAY)
+                    } else {
+                        spinner.setBackgroundResource(R.drawable.bg_spinner)
                     }
                 }
             }
+            editTextNameOfCommunity.setOnFocusChangeListener { _, focused ->
+                if (!focused) {
+                    validName()
+                }
+            }
+
+
+
 
             btsave.setOnClickListener {
                 val communityName = editTextNameOfCommunity.text.toString()
                 var managerName = spinner.selectedItem.toString()
                 if (managerName.equals(communityManager[0])) {
                     managerName = ""
+
                 }
                 val description = editDescriptionOfCommunity.text.toString()
                 // val manager = Member(managerName)
                 val community = Community(name = communityName, manager = managerName, description = description)
+                if (communityName.isEmpty()) {
+                    editTextNameOfCommunity.error = "ERROR"
+                    editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border_error)
+                } else {
+                    editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border)
+                }
 
-                // TODO Community Validation
+                if (managerName.isEmpty()) {
+                    spinner.setBackgroundResource(R.drawable.bg_spinner_error)
+                } else {
+                    spinner.setBackgroundResource(R.drawable.bg_spinner)
+                }
+
                 // addCommunity(community)
+                // setResult(RESULT_OK)
+                // finish()
 
                 // If invalid
                 val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
@@ -100,7 +124,21 @@ class ManageCommunityActivity : AppCompatActivity() {
                     ?.setMessage("Community Name: ${community.name}\nCommunity Assigned To: ${community.manager}\nCommunity Description: ${community.description}\n")
                 val dialog: AlertDialog? = builder?.create()
                 dialog?.show()
+
+
             }
+        }
+
+    }
+
+
+    private fun validName() {
+        val communityName = binding.editTextNameOfCommunity.text.toString()
+        return if (communityName.isEmpty()) {
+            binding.editTextNameOfCommunity.error = "ERROR"
+            binding.editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border_error)
+        } else {
+            binding.editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border)
         }
 
     }

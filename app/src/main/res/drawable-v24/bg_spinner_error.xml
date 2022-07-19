@@ -9,7 +9,7 @@
                     <corners android:radius="8dp"/>
                     <stroke
                         android:width="3dp"
-                        android:color="#D6DDE5"/>
+                        android:color="#ff0000"/>
                 </shape>
             </item>
             <item android:gravity="center|end">
@@ -21,7 +21,7 @@
                     <shape android:shape="line" android:top="1dip">
                         <stroke
                             android:width="3dip"
-                            android:color="#D6DDE5"/>
+                            android:color="#ff0000"/>
                     </shape>
                 </rotate>
             </item>
