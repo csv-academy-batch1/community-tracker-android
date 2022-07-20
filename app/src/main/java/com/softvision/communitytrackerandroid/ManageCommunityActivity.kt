@@ -109,9 +109,8 @@ class ManageCommunityActivity : AppCompatActivity() {
                 }
 
                 if (CommunityValidator.validateCommunity(community)) {
-                    // addCommunity(community)
                     // TODO Remove finish() method and use addCommunity() method
-                    finish()
+                    addCommunity(community)
                 }
             }
         }
