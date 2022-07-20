@@ -1,6 +1,7 @@
 package com.softvision.communitytrackerandroid
 
-import com.softvision.communitytrackerandroid.data.Community
+import com.softvision.communitytrackerandroid.data.model.Community
+import com.softvision.communitytrackerandroid.util.CommunityValidator
 import org.junit.Test
 
 import org.junit.Assert.*

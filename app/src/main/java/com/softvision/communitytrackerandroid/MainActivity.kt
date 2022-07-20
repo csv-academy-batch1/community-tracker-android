@@ -2,21 +2,23 @@ package com.softvision.communitytrackerandroid
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.softvision.communitytrackerandroid.Adampter.ListCommunityAdapter
 import com.softvision.communitytrackerandroid.data.SampleListCommunity
+import com.softvision.communitytrackerandroid.data.api.ApiHelper
+import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val TAG: String = MainActivity::class.java.canonicalName
 
     public val ACTION_ADD_COMMUNITY: Int = 1
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -27,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        lifecycleScope.launchWhenCreated {
+            try {
+                val communities = ApiHelper.apiInterface.getCommunities()
+                Log.d(TAG, "$communities")
+            }
+            catch (e: Exception){
+                Log.e("Error", e.localizedMessage)
+            }
+        }
+
+        // TODO Use value from API to display community list
         var listOfCommunity = listOf(
             SampleListCommunity("Mobile Cross Platform"),
             SampleListCommunity("Enterprise.Net"),
@@ -46,10 +59,12 @@ class MainActivity : AppCompatActivity() {
                 layoutManager = GridLayoutManager(this@MainActivity, 2)
                 setHasFixedSize(true)
             }
-        }
 
-        binding.fab.setOnClickListener { view ->
-            startActivityForResult(Intent(this@MainActivity, ManageCommunityActivity::class.java), ACTION_ADD_COMMUNITY)
+            fab.setOnClickListener { view ->
+                val intent = Intent(this@MainActivity, ManageCommunityActivity::class.java)
+                intent.putExtra("action", ACTION_ADD_COMMUNITY)
+                startActivityForResult(intent, ACTION_ADD_COMMUNITY)
+            }
         }
     }
 

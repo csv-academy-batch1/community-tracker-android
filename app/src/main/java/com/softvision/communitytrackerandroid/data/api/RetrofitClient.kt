@@ -1,5 +1,6 @@
 package tayabas.anthony.retrofitsample.data.api
 
+import com.softvision.communitytrackerandroid.data.api.ApiHelper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +18,7 @@ object RetrofitClient {
 
 
         var retrofit: Retrofit = retrofit2.Retrofit.Builder()
-            .baseUrl("https://csvacademy-softvision.in")
+            .baseUrl(ApiHelper.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(mOkHttpClient)
             .build()

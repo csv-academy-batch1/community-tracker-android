@@ -1,6 +1,6 @@
-package com.softvision.communitytrackerandroid
+package com.softvision.communitytrackerandroid.util
 
-import com.softvision.communitytrackerandroid.data.Community
+import com.softvision.communitytrackerandroid.data.model.Community
 
 object CommunityValidator {
 
