@@ -7,13 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.softvision.communitytrackerandroid.Adampter.ListCommunityAdapter
-import com.softvision.communitytrackerandroid.data.SampleListCommunity
+import com.softvision.communitytrackerandroid.adapter.ListCommunityAdapter
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
-import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -29,36 +27,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lifecycleScope.launchWhenCreated {
-            try {
-                val communities = ApiHelper.apiInterface.getCommunities()
-                Log.d(TAG, "$communities")
-            }
-            catch (e: Exception){
-                Log.e("Error", e.localizedMessage)
-            }
-        }
 
-        // TODO Use value from API to display community list
-        var listOfCommunity = listOf(
-            SampleListCommunity("Mobile Cross Platform"),
-            SampleListCommunity("Enterprise.Net"),
-            SampleListCommunity("Quality Engineering"),
-            SampleListCommunity("Full-Stack Web"),
-            SampleListCommunity("Product Delivery"),
-            SampleListCommunity("Cloud and DevOps"),
-            SampleListCommunity("Product Delivery"),
-            SampleListCommunity("Cloud and DevOps")
-        )
+
         with(binding) {
-            val recyclerView = findViewById<RecyclerView>(R.id.rvListCommunity)
-            val listCommunityAdapter = ListCommunityAdapter(listOfCommunity)
+            lifecycleScope.launchWhenCreated {
+                try {
+                    val response = ApiHelper.apiInterface.getCommunities()
 
-            recyclerView.apply {
-                adapter = listCommunityAdapter
-                layoutManager = GridLayoutManager(this@MainActivity, 2)
-                setHasFixedSize(true)
+                    if (response.isSuccessful && response.body() != null && response.body()!!.communities.isNotEmpty()) {
+                        val testCommunity = response.body()!!.communities
+                        Log.d(TAG, "$response")
+
+                        val listCommunityAdapter = ListCommunityAdapter(testCommunity)
+
+                        rvListCommunity.apply {
+                            adapter = listCommunityAdapter
+                            layoutManager = GridLayoutManager(this@MainActivity, 2)
+                            setHasFixedSize(true)
+                        }
+                    } else {
+                        Toast.makeText(this@MainActivity, "Error on getting community list", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                catch (e: Exception){
+                    Log.e("Error", e.localizedMessage)
+                }
             }
+
+
 
             fab.setOnClickListener { view ->
                 val intent = Intent(this@MainActivity, ManageCommunityActivity::class.java)
@@ -66,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, ACTION_ADD_COMMUNITY)
             }
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

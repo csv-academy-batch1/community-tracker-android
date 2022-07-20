@@ -1,17 +1,15 @@
-package com.softvision.communitytrackerandroid.Adampter
+package com.softvision.communitytrackerandroid.adapter
 
 import android.graphics.Color
-import android.service.autofill.Dataset
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.softvision.communitytrackerandroid.data.SampleListCommunity
+import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.databinding.ItemCommunityBinding
 import java.util.*
-import android.graphics.drawable.GradientDrawable as GradientDrawable1
 
 class ListCommunityAdapter (
-        private val dataset: List<SampleListCommunity>
+        private val dataset: List<Community>
         ): RecyclerView.Adapter<ListCommunityAdapter.ListCommunityViewHolder>() {
 
         class ListCommunityViewHolder(val binding: ItemCommunityBinding): RecyclerView.ViewHolder(binding.root)
@@ -31,7 +29,7 @@ class ListCommunityAdapter (
                         val color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256))
 
                         with(holder.binding) {
-                                tvCommunityName.text = item.communityName
+                                tvCommunityName.text = item.name
                                 layoutColor.setCardBackgroundColor(color)
                         }
                 }
