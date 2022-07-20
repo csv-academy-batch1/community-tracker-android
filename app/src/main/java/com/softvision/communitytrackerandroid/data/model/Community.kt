@@ -9,13 +9,13 @@ data class Community(
     @SerializedName("communityName")
     var name: String = "",
 
-    @SerializedName("communityManager")
-    var manager: String = "",
+    @SerializedName("communityManagerId")
+    var managerId: Int = 0,
 
-    @SerializedName("description")
+    @SerializedName("communityDescription")
     var description: String = "") {
 
     override fun toString(): String {
-        return ("$name $manager $description")
+        return ("$name $managerId $description")
     }
 }
