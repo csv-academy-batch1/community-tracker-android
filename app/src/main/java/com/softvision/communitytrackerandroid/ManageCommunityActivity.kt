@@ -12,15 +12,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import com.google.rpc.LocalizedMessage
 import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.data.DataObject
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
+import com.softvision.communitytrackerandroid.data.model.Member
 import com.softvision.communitytrackerandroid.databinding.ActivityManageCommunityBinding
 import com.softvision.communitytrackerandroid.util.CommunityValidator
 
 class ManageCommunityActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityManageCommunityBinding
+    private var action: Int = MainActivity.ACTION_ADD_COMMUNITY
+    private var selectedCommunity: Community? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,14 +33,29 @@ class ManageCommunityActivity : AppCompatActivity() {
         binding = ActivityManageCommunityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bundle = intent.extras
+        if (bundle != null) {
+            action = bundle.getInt("action", MainActivity.ACTION_ADD_COMMUNITY)
+            selectedCommunity = bundle.getParcelable<Community>("community")?: null
+        }
+
         with(binding) {
-            val communityManager = DataObject.getAllData()
+
+            if (action == MainActivity.ACTION_ADD_COMMUNITY) {
+                tvTitle.setText("Community Input Page.")
+                btsave.setText("Save")
+            } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
+                tvTitle.setText("Community Update Page.")
+                btsave.setText("Update")
+            }
+
+            val communityManager = DataObject.getMemberAllData()
             // TODO Change Manager names(String) into Member instance
-            val adapter = object: ArrayAdapter<String>(
+            val adapter = object : ArrayAdapter<Member>(
                 this@ManageCommunityActivity,
                 android.R.layout.simple_spinner_dropdown_item,
-                communityManager)
-            {
+                communityManager
+            ) {
                 override fun isEnabled(position: Int): Boolean {
                     // Disable the first item from Spinner
                     // First item will be used for hint
@@ -62,7 +81,7 @@ class ManageCommunityActivity : AppCompatActivity() {
             }
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
-            spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
 
@@ -73,7 +92,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     val value = parent!!.getItemAtPosition(position).toString()
-                    if (value.equals(communityManager[0])) {
+                    if (value.equals(communityManager[0].toString())) {
                         (view as TextView).setTextColor(Color.GRAY)
                     } else {
                         spinner.setBackgroundResource(R.drawable.bg_spinner)
@@ -88,12 +107,13 @@ class ManageCommunityActivity : AppCompatActivity() {
 
             btsave.setOnClickListener {
                 val communityName = editTextNameOfCommunity.text.toString()
-                var managerName = spinner.selectedItem.toString()
-                if (managerName.equals(communityManager[0])) {
-                    managerName = ""
-                }
+                val manager = spinner.selectedItem as Member
                 val description = editDescriptionOfCommunity.text.toString()
-                val community = Community(name = communityName, manager = managerName, description = description)
+                val community = Community(
+                    name = communityName,
+                    managerId = manager.id,
+                    description = description,
+                )
 
                 if (communityName.isEmpty()) {
                     editTextNameOfCommunity.error = "Required Field"
@@ -102,18 +122,42 @@ class ManageCommunityActivity : AppCompatActivity() {
                     editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border)
                 }
 
-                if (managerName.isEmpty()) {
+                if (manager.id == 0) {
                     spinner.setBackgroundResource(R.drawable.bg_spinner_error)
                 } else {
                     spinner.setBackgroundResource(R.drawable.bg_spinner)
                 }
 
                 if (CommunityValidator.validateCommunity(community)) {
-                    // TODO Remove finish() method and use addCommunity() method
-                    addCommunity(community)
+                    if (action == MainActivity.ACTION_ADD_COMMUNITY) {
+                        addCommunity(community)
+                    } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
+
+                    }
                 }
             }
+
+            if (action == MainActivity.ACTION_ADD_COMMUNITY) {
+                tvTitle.setText("Community Input Page.")
+                btsave.setText("Save")
+            } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
+                editTextNameOfCommunity.setText(selectedCommunity?.name)
+                editDescriptionOfCommunity.setText(selectedCommunity?.description)
+                val index = getSpinnerIndex(communityManager)
+                spinner.setSelection(index)
+                tvTitle.setText("Community Update Page.")
+                btsave.setText("Update")
+            }
         }
+    }
+
+    fun getSpinnerIndex(communityManager : List<Member>) : Int {
+        for (i in communityManager.indices) {
+            if (selectedCommunity?.managerId == communityManager.get(i).id) {
+                return i
+            }
+        }
+        return 0
     }
 
     private fun validName() {
@@ -146,13 +190,19 @@ class ManageCommunityActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this@ManageCommunityActivity,
-                        response.errorBody().toString(),
+                        "Add Community : Failed",
                         Toast.LENGTH_LONG
                     ).show()
                 }
             } catch (ex: Exception){
-                Log.e("Error", ex.localizedMessage)
+                 ex.localizedMessage?.let { Log.e("Error", it) }
+                Toast.makeText(
+                    this@ManageCommunityActivity,
+                    "Add Community : Failed",
+                    Toast.LENGTH_LONG
+                ).show()
+
+                 }
             }
         }
     }
-}

@@ -2,16 +2,14 @@ package com.softvision.communitytrackerandroid
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.softvision.communitytrackerandroid.adapter.ListCommunityAdapter
-import com.softvision.communitytrackerandroid.data.api.ApiHelper
+import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,8 +17,16 @@ class MainActivity : AppCompatActivity() {
     private val TAG: String = MainActivity::class.java.canonicalName
 
     public val ACTION_ADD_COMMUNITY: Int = 1
+    public val ACTION_UPDATE_COMMUNITY: Int = 2
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private val testCommunity = listOf<Community>(
+        Community(id = 1, name = ".Net", managerId = 6, description = ".Net Group"),
+        Community(id = 2, name = "QE Group", managerId = 7, description = "QE Group"),
+        Community(id = 3, name = "Mobile", managerId = 8, description = "Android and iOS Developer"),
+        Community(id = 4, name = "Java", managerId = 9, description = "Coffee Enterprise"),
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,32 +34,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+      with(binding) {
 
-        with(binding) {
-            lifecycleScope.launchWhenCreated {
-                try {
-                    val response = ApiHelper.apiInterface.getCommunities()
 
-                    if (response.isSuccessful && response.body() != null && response.body()!!.communities.isNotEmpty()) {
-                        val testCommunity = response.body()!!.communities
-                        Log.d(TAG, "$response")
+//                    val response = ApiHelper.apiInterface.getCommunities()
+//
+//                    if (response.isSuccessful && response.body() != null && response.body()!!.communities.isNotEmpty()) {
+//                        val testCommunity = response.body()!!.communities
+//                        Log.d(TAG, "$response")
+//
+//                        val listCommunityAdapter = ListCommunityAdapter(testCommunity, onItemClick = { position, view ->
+//                            onItemClick(position, view)
+//                        })
+//                        rvListCommunity.apply {
+//                            adapter = listCommunityAdapter
+//                            layoutManager = GridLayoutManager(this@MainActivity, 2)
+//                            setHasFixedSize(true)
+//                        }
+//                            } else {
+//                        Toast.makeText(this@MainActivity, "Error on getting community list", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                catch (e: Exception){
+//                    Log.e("Error", e.localizedMessage)
+//                }
 
-                        val listCommunityAdapter = ListCommunityAdapter(testCommunity)
-
+          val listCommunityAdapter = ListCommunityAdapter(testCommunity, onItemClick = { position, view ->
+                            onItemClick(position, view)
+                        })
                         rvListCommunity.apply {
                             adapter = listCommunityAdapter
                             layoutManager = GridLayoutManager(this@MainActivity, 2)
                             setHasFixedSize(true)
                         }
-                    } else {
-                        Toast.makeText(this@MainActivity, "Error on getting community list", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                catch (e: Exception){
-                    Log.e("Error", e.localizedMessage)
-                }
-            }
-
 
 
             fab.setOnClickListener { view ->
@@ -61,6 +74,20 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("action", ACTION_ADD_COMMUNITY)
                 startActivityForResult(intent, ACTION_ADD_COMMUNITY)
             }
+        }
+
+    }
+
+    fun onItemClick(position: Int, view: View) {
+        if (view.id == R.id.layoutColor){
+
+        }else if (view.id == R.id.imbUpdateCommunity) {
+            val intent = Intent(this@MainActivity, ManageCommunityActivity::class.java)
+            intent.putExtra("action", ACTION_UPDATE_COMMUNITY)
+            intent.putExtra("community", testCommunity.get(position))
+            startActivityForResult(intent, ACTION_UPDATE_COMMUNITY)
+
+
         }
 
     }
@@ -90,4 +117,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    companion object {
+        public val ACTION_ADD_COMMUNITY: Int = 1
+        public val ACTION_UPDATE_COMMUNITY: Int = 2
+    }
+
 }
+
+
+

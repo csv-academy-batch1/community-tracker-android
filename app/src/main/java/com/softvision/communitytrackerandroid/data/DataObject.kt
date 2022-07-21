@@ -20,4 +20,9 @@ object DataObject {
         }
         return list
     }
+
+    fun getMemberAllData(): List<Member> {
+        return managerList.toList()
+
+    }
 }

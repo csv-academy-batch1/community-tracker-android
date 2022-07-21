@@ -2,6 +2,7 @@ package com.softvision.communitytrackerandroid.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.softvision.communitytrackerandroid.data.model.Community
@@ -9,20 +10,33 @@ import com.softvision.communitytrackerandroid.databinding.ItemCommunityBinding
 import java.util.*
 
 class ListCommunityAdapter (
-        private val dataset: List<Community>
+        private val dataset: List<Community>,
+        private val onItemClick: (position: Int, view:View) -> Unit
         ): RecyclerView.Adapter<ListCommunityAdapter.ListCommunityViewHolder>() {
 
-        class ListCommunityViewHolder(val binding: ItemCommunityBinding): RecyclerView.ViewHolder(binding.root)
+        class ListCommunityViewHolder(val binding: ItemCommunityBinding, onItemClick: (position: Int, view: View) -> Unit):
+                RecyclerView.ViewHolder(binding.root) {
+                        init {
+                                itemView.setOnClickListener{ view ->
+                                        onItemClick(adapterPosition, view)
+                                }
+        //                            itemView.imbUpdateCommunity({ view ->
+        //                            onItemClick(adapterPosition, view)
+        //                    }
+                        }
+                }
+
+
         private var isAdmin = false
         public fun  setIsAdmin(isAdmin: Boolean) {
                 this.isAdmin = isAdmin
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListCommunityViewHolder {
                 val binding = ItemCommunityBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return ListCommunityViewHolder(binding)
+                return ListCommunityAdapter.ListCommunityViewHolder(binding, onItemClick)
         }
 
-        override fun onBindViewHolder(holder: ListCommunityViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: ListCommunityAdapter.ListCommunityViewHolder, position: Int) {
                 val item = dataset[position]
                 holder.itemView.apply {
                         val random = Random()
@@ -31,6 +45,11 @@ class ListCommunityAdapter (
                         with(holder.binding) {
                                 tvCommunityName.text = item.name
                                 layoutColor.setCardBackgroundColor(color)
+
+                                imbUpdateCommunity.setOnClickListener { view ->
+                                        onItemClick(position,view)
+
+                                }
                         }
                 }
         }
@@ -38,6 +57,7 @@ class ListCommunityAdapter (
         override fun getItemCount(): Int {
                 return dataset.size
         }
+
 
 
 }
