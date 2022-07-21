@@ -15,13 +15,15 @@ import androidx.lifecycle.lifecycleScope
 import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.data.DataObject
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
+import com.softvision.communitytrackerandroid.data.model.Member
 import com.softvision.communitytrackerandroid.databinding.ActivityManageCommunityBinding
 import com.softvision.communitytrackerandroid.util.CommunityValidator
 
 class ManageCommunityActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityManageCommunityBinding
-
+    private var action: Int = MainActivity.ACTION_ADD_COMMUNITY
+    private var selectedCommunity: Community? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +31,16 @@ class ManageCommunityActivity : AppCompatActivity() {
         binding = ActivityManageCommunityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bundle = intent.extras
+        if (bundle != null) {
+            action = bundle.getInt("action", MainActivity.ACTION_ADD_COMMUNITY)
+            selectedCommunity = bundle.getParcelable<Community>("community") ?: null
+        }
         with(binding) {
-            val communityManager = DataObject.getAllData()
+
+            val communityManager = DataObject.getAllMember()
             // TODO Change Manager names(String) into Member instance
-            val adapter = object: ArrayAdapter<String>(
+            val adapter = object: ArrayAdapter<Member>(
                 this@ManageCommunityActivity,
                 android.R.layout.simple_spinner_dropdown_item,
                 communityManager)
@@ -73,7 +81,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     val value = parent!!.getItemAtPosition(position).toString()
-                    if (value.equals(communityManager[0])) {
+                    if (value.equals(communityManager[0].name)) {
                         (view as TextView).setTextColor(Color.GRAY)
                     } else {
                         spinner.setBackgroundResource(R.drawable.bg_spinner)
@@ -86,14 +94,11 @@ class ManageCommunityActivity : AppCompatActivity() {
                 }
             }
 
-            btsave.setOnClickListener {
+            btSave.setOnClickListener {
                 val communityName = editTextNameOfCommunity.text.toString()
-                var managerName = spinner.selectedItem.toString()
-                if (managerName.equals(communityManager[0])) {
-                    managerName = ""
-                }
+                val manager = spinner.selectedItem as Member
                 val description = editDescriptionOfCommunity.text.toString()
-                val community = Community(name = communityName, manager = managerName, description = description)
+                val community = Community(name = communityName, managerId = manager.id, description = description)
 
                 if (communityName.isEmpty()) {
                     editTextNameOfCommunity.error = "Required Field"
@@ -102,25 +107,47 @@ class ManageCommunityActivity : AppCompatActivity() {
                     editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border)
                 }
 
-                if (managerName.isEmpty()) {
+                if (manager.id == 0) {
                     spinner.setBackgroundResource(R.drawable.bg_spinner_error)
                 } else {
                     spinner.setBackgroundResource(R.drawable.bg_spinner)
                 }
 
                 if (CommunityValidator.validateCommunity(community)) {
-                    // addCommunity(community)
-                    // TODO Remove finish() method and use addCommunity() method
-                    finish()
+                    if (action == MainActivity.ACTION_ADD_COMMUNITY) {
+//                        addCommunity(community)
+                    } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
+
+                    }
                 }
             }
+            if (action == MainActivity.ACTION_ADD_COMMUNITY) {
+                tvTitle.setText(R.string.community_input_page)
+                btSave.setText(R.string.save)
+            } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
+                editTextNameOfCommunity.setText(selectedCommunity?.name)
+                editDescriptionOfCommunity.setText(selectedCommunity?.description)
+                val index = getSpinnerIndex(communityManager)
+                spinner.setSelection(index)
+                tvTitle.setText(R.string.community_update_page)
+                btSave.setText(R.string.update)
+            }
         }
+    }
+
+    fun getSpinnerIndex(communityManager: List<Member>): Int {
+        for (i in communityManager.indices) {
+            if (selectedCommunity?.managerId == communityManager.get(i).id) {
+                return i
+            }
+        }
+        return 0
     }
 
     private fun validName() {
         val communityName = binding.editTextNameOfCommunity.text.toString()
         return if (communityName.isEmpty()) {
-            binding.editTextNameOfCommunity.error = "ERROR"
+            binding.editTextNameOfCommunity.error = "Required Field"
             binding.editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border_error)
         } else {
             binding.editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border)
@@ -147,12 +174,17 @@ class ManageCommunityActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this@ManageCommunityActivity,
-                        response.errorBody().toString(),
+                        "Add Community : Failed",
                         Toast.LENGTH_LONG
                     ).show()
                 }
             } catch (ex: Exception){
-                Log.e("Error", ex.localizedMessage)
+                ex.localizedMessage?.let { Log.e("Error", it) }
+                Toast.makeText(
+                    this@ManageCommunityActivity,
+                    "Add Community : Failed",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }

@@ -5,7 +5,7 @@ import com.softvision.communitytrackerandroid.data.model.Member
 object DataObject {
 
     var managerList = arrayOf(
-        Member(1, "Community Assigned To"),
+        Member(0, "Community Assigned To"),
         Member(6, "Lloyd Miguel"),
         Member(7, "Gilbert Morales"),
         Member(8, "Rennor Galicia"),
@@ -19,5 +19,9 @@ object DataObject {
             list.add(member.name)
         }
         return list
+    }
+
+    fun getAllMember(): List<Member> {
+        return managerList.toList()
     }
 }
