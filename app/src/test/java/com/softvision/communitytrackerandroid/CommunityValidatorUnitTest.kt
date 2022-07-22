@@ -15,7 +15,12 @@ class CommunityValidatorUnitTest {
 
     @Test
     fun communityValidator_validCommunity_returnTrue() {
-        val community = Community(name = "Mobile", manager = "Zack Zabala", description = "Mobile Developer")
+        val community = Community(
+            name = "Mobile",
+            manager = "Zack Zabala",
+            description = "Mobile Developer",
+            managerId = 6
+        )
 
         assertTrue(CommunityValidator.validateCommunity(community))
     }
@@ -23,14 +28,24 @@ class CommunityValidatorUnitTest {
 
     @Test
     fun communityValidator_validCommunity_nameIsEmpty_returnFalse() {
-        val community = Community(name = "", manager = "Zack Zabala", description = "Mobile Developer")
+        val community = Community(
+            name = "",
+            manager = "Zack Zabala",
+            description = "Mobile Developer",
+            managerId = 6
+        )
 
         assertFalse(CommunityValidator.validateCommunity(community))
     }
 
     @Test
     fun communityValidator_validCommunity_managerIsEmpty_returnFalse() {
-        val community = Community(name = "Mobile", manager = "", description = "Mobile Developer")
+        val community = Community(
+            name = "Mobile",
+            manager = "",
+            description = "Mobile Developer",
+            managerId = 6
+        )
 
         assertFalse(CommunityValidator.validateCommunity(community))
     }
@@ -40,7 +55,12 @@ class CommunityValidatorUnitTest {
 
     @Test
     fun communityValidator_validCommunity_descriptionIsEmpty_returnFalse() {
-        val community = Community(name = "Mobile", manager = "Zack Zabala", description = "")
+        val community = Community(
+            name = "Mobile",
+            manager = "Zack Zabala",
+            description = "",
+            managerId = 6
+        )
 
         assertFalse(CommunityValidator.validateCommunity(community))
     }
