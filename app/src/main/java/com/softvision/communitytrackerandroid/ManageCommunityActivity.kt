@@ -24,7 +24,6 @@ class ManageCommunityActivity : AppCompatActivity() {
     private lateinit var binding: ActivityManageCommunityBinding
     private var action: Int = MainActivity.ACTION_ADD_COMMUNITY
     private var selectedCommunity: Community? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,15 +35,15 @@ class ManageCommunityActivity : AppCompatActivity() {
             action = bundle.getInt("action", MainActivity.ACTION_ADD_COMMUNITY)
             selectedCommunity = bundle.getParcelable<Community>("community") ?: null
         }
-        with(binding) {
 
+        with(binding) {
             val communityManager = DataObject.getAllMember()
             // TODO Change Manager names(String) into Member instance
-            val adapter = object: ArrayAdapter<Member>(
+            val adapter = object : ArrayAdapter<Member>(
                 this@ManageCommunityActivity,
                 android.R.layout.simple_spinner_dropdown_item,
-                communityManager)
-            {
+                communityManager
+            ) {
                 override fun isEnabled(position: Int): Boolean {
                     // Disable the first item from Spinner
                     // First item will be used for hint
@@ -70,7 +69,7 @@ class ManageCommunityActivity : AppCompatActivity() {
             }
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
-            spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
 
@@ -81,13 +80,14 @@ class ManageCommunityActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     val value = parent!!.getItemAtPosition(position).toString()
-                    if (value.equals(communityManager[0].name)) {
+                    if (value.equals(communityManager[0].toString())) {
                         (view as TextView).setTextColor(Color.GRAY)
                     } else {
                         spinner.setBackgroundResource(R.drawable.bg_spinner)
                     }
                 }
             }
+
             editTextNameOfCommunity.setOnFocusChangeListener { _, focused ->
                 if (!focused) {
                     validName()
@@ -98,7 +98,11 @@ class ManageCommunityActivity : AppCompatActivity() {
                 val communityName = editTextNameOfCommunity.text.toString()
                 val manager = spinner.selectedItem as Member
                 val description = editDescriptionOfCommunity.text.toString()
-                val community = Community(name = communityName, managerId = manager.id, description = description)
+                val community = Community(
+                    name = communityName,
+                    managerId = manager.id,
+                    description = description,
+                )
 
                 if (communityName.isEmpty()) {
                     editTextNameOfCommunity.error = "Required Field"
@@ -121,6 +125,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                     }
                 }
             }
+
             if (action == MainActivity.ACTION_ADD_COMMUNITY) {
                 tvTitle.setText(R.string.community_input_page)
                 btSave.setText(R.string.save)
@@ -135,7 +140,7 @@ class ManageCommunityActivity : AppCompatActivity() {
         }
     }
 
-    fun getSpinnerIndex(communityManager: List<Member>): Int {
+    fun getSpinnerIndex(communityManager : List<Member>) : Int {
         for (i in communityManager.indices) {
             if (selectedCommunity?.managerId == communityManager.get(i).id) {
                 return i
@@ -185,7 +190,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                     "Add Community : Failed",
                     Toast.LENGTH_LONG
                 ).show()
-            }
+             }
         }
     }
 }

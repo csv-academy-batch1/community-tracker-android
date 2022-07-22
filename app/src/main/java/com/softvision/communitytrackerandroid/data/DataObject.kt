@@ -13,14 +13,6 @@ object DataObject {
         Member(10, "Baron Paredes")
     )
 
-    fun getAllData(): List<String> {
-        val list = mutableListOf<String>()
-        for (member in managerList) {
-            list.add(member.name)
-        }
-        return list
-    }
-
     fun getAllMember(): List<Member> {
         return managerList.toList()
     }

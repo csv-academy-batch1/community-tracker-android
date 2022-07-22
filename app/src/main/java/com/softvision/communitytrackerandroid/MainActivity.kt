@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG: String = MainActivity::class.java.canonicalName
 
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
     private val testCommunity = listOf<Community>(
         Community(id = 1, name = "Enterprise.net", managerId = 6, description = ".Net Group"),
         Community(id = 2, name = "Full-Stack Web", managerId = 7, description = "Web Group"),
@@ -35,12 +35,11 @@ class MainActivity : AppCompatActivity() {
         Community(id = 8, name = "Mobile Cross Platform", managerId = 7, description = "Android and iOS Developer"),
         Community(id = 9, name = "Research and Developent", managerId = 8, description = "Android and iOS Developer")
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         with(binding) {
             /*
@@ -68,7 +67,8 @@ class MainActivity : AppCompatActivity() {
                 catch (e: Exception){
                     Log.e("Error", e.localizedMessage)
                 }
-            }*/
+            } 
+            */
 
             val listCommunityAdapter = ListCommunityAdapter(testCommunity, onItemClick = { position, view ->
                 onItemClick(position, view)
@@ -131,5 +131,4 @@ class MainActivity : AppCompatActivity() {
         public val ACTION_ADD_COMMUNITY: Int = 1
         public val ACTION_UPDATE_COMMUNITY: Int = 2
     }
-
 }

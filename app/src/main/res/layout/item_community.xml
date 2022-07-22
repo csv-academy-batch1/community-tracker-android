@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -37,10 +38,4 @@
             android:contentDescription="update_community"/>
 
     </LinearLayout>
-
-
-
-
-
-
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
