@@ -71,7 +71,7 @@
             android:layout_weight=".40"/>
 
         <Button
-            android:id="@+id/btsave"
+            android:id="@+id/btSave"
             android:layout_width="100dp"
             android:layout_height="58dp"
             android:layout_gravity="center"

@@ -12,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
-import com.google.rpc.LocalizedMessage
 import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.data.DataObject
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
@@ -25,8 +24,6 @@ class ManageCommunityActivity : AppCompatActivity() {
     private lateinit var binding: ActivityManageCommunityBinding
     private var action: Int = MainActivity.ACTION_ADD_COMMUNITY
     private var selectedCommunity: Community? = null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,20 +33,11 @@ class ManageCommunityActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             action = bundle.getInt("action", MainActivity.ACTION_ADD_COMMUNITY)
-            selectedCommunity = bundle.getParcelable<Community>("community")?: null
+            selectedCommunity = bundle.getParcelable<Community>("community") ?: null
         }
 
         with(binding) {
-
-            if (action == MainActivity.ACTION_ADD_COMMUNITY) {
-                tvTitle.setText("Community Input Page.")
-                btsave.setText("Save")
-            } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
-                tvTitle.setText("Community Update Page.")
-                btsave.setText("Update")
-            }
-
-            val communityManager = DataObject.getMemberAllData()
+            val communityManager = DataObject.getAllMember()
             // TODO Change Manager names(String) into Member instance
             val adapter = object : ArrayAdapter<Member>(
                 this@ManageCommunityActivity,
@@ -99,13 +87,14 @@ class ManageCommunityActivity : AppCompatActivity() {
                     }
                 }
             }
+
             editTextNameOfCommunity.setOnFocusChangeListener { _, focused ->
                 if (!focused) {
                     validName()
                 }
             }
 
-            btsave.setOnClickListener {
+            btSave.setOnClickListener {
                 val communityName = editTextNameOfCommunity.text.toString()
                 val manager = spinner.selectedItem as Member
                 val description = editDescriptionOfCommunity.text.toString()
@@ -130,7 +119,7 @@ class ManageCommunityActivity : AppCompatActivity() {
 
                 if (CommunityValidator.validateCommunity(community)) {
                     if (action == MainActivity.ACTION_ADD_COMMUNITY) {
-                        addCommunity(community)
+//                        addCommunity(community)
                     } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
 
                     }
@@ -138,15 +127,15 @@ class ManageCommunityActivity : AppCompatActivity() {
             }
 
             if (action == MainActivity.ACTION_ADD_COMMUNITY) {
-                tvTitle.setText("Community Input Page.")
-                btsave.setText("Save")
+                tvTitle.setText(R.string.community_input_page)
+                btSave.setText(R.string.save)
             } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
                 editTextNameOfCommunity.setText(selectedCommunity?.name)
                 editDescriptionOfCommunity.setText(selectedCommunity?.description)
                 val index = getSpinnerIndex(communityManager)
                 spinner.setSelection(index)
-                tvTitle.setText("Community Update Page.")
-                btsave.setText("Update")
+                tvTitle.setText(R.string.community_update_page)
+                btSave.setText(R.string.update)
             }
         }
     }
@@ -163,7 +152,7 @@ class ManageCommunityActivity : AppCompatActivity() {
     private fun validName() {
         val communityName = binding.editTextNameOfCommunity.text.toString()
         return if (communityName.isEmpty()) {
-            binding.editTextNameOfCommunity.error = "ERROR"
+            binding.editTextNameOfCommunity.error = "Required Field"
             binding.editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border_error)
         } else {
             binding.editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border)
@@ -195,14 +184,13 @@ class ManageCommunityActivity : AppCompatActivity() {
                     ).show()
                 }
             } catch (ex: Exception){
-                 ex.localizedMessage?.let { Log.e("Error", it) }
+                ex.localizedMessage?.let { Log.e("Error", it) }
                 Toast.makeText(
                     this@ManageCommunityActivity,
                     "Add Community : Failed",
                     Toast.LENGTH_LONG
                 ).show()
-
-                 }
-            }
+             }
         }
     }
+}
