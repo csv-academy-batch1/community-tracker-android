@@ -12,8 +12,11 @@ data class Community(
     @SerializedName("CommunityName")
     var name: String = "",
 
-    @SerializedName("CommunityManager")
+    @SerializedName("CommunityMgrid")
     var managerId: Int = 0,
+
+    @SerializedName("CommunityManager")
+    var manager: String = "",
 
     @SerializedName("Description")
     var description: String = ""): Parcelable {

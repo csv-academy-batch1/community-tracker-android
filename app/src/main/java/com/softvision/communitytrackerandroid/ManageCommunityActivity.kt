@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.data.DataObject
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
+import com.softvision.communitytrackerandroid.data.model.CommunityRequest
 import com.softvision.communitytrackerandroid.data.model.Member
 import com.softvision.communitytrackerandroid.databinding.ActivityManageCommunityBinding
 import com.softvision.communitytrackerandroid.util.CommunityValidator
@@ -37,8 +38,7 @@ class ManageCommunityActivity : AppCompatActivity() {
         }
 
         with(binding) {
-            val communityManager = DataObject.getAllMember()
-            // TODO Change Manager names(String) into Member instance
+            val communityManager = DataObject.getAllManager()
             val adapter = object : ArrayAdapter<Member>(
                 this@ManageCommunityActivity,
                 android.R.layout.simple_spinner_dropdown_item,
@@ -98,11 +98,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                 val communityName = editTextNameOfCommunity.text.toString()
                 val manager = spinner.selectedItem as Member
                 val description = editDescriptionOfCommunity.text.toString()
-                val community = Community(
-                    name = communityName,
-                    managerId = manager.id,
-                    description = description,
-                )
+
 
                 if (communityName.isEmpty()) {
                     editTextNameOfCommunity.error = "Required Field"
@@ -116,14 +112,27 @@ class ManageCommunityActivity : AppCompatActivity() {
                 } else {
                     spinner.setBackgroundResource(R.drawable.bg_spinner)
                 }
+                if (action == MainActivity.ACTION_ADD_COMMUNITY) {
+                    val communityRequest = CommunityRequest(
+                        name = communityName,
+                        managerId = manager.id,
+                        description = description,
+                    )
+                    if (CommunityValidator.validateCommunity(communityRequest)) {
+                        addCommunity(communityRequest)
+                    }
 
-                if (CommunityValidator.validateCommunity(community)) {
-                    if (action == MainActivity.ACTION_ADD_COMMUNITY) {
-//                        addCommunity(community)
-                    } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
+                } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
+                    val community = Community(
+                        name = communityName,
+                        managerId = manager.id,
+                        description = description,
+                    )
+                    if (CommunityValidator.validateCommunity(community)) {
 
                     }
                 }
+
             }
 
             if (action == MainActivity.ACTION_ADD_COMMUNITY) {
@@ -159,7 +168,7 @@ class ManageCommunityActivity : AppCompatActivity() {
         }
     }
 
-    fun addCommunity(community: Community) {
+    fun addCommunity(community: CommunityRequest) {
         lifecycleScope.launchWhenCreated {
             try {
                 val response = ApiHelper.apiInterface.addCommunity(community)

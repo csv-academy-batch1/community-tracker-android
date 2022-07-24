@@ -62,14 +62,14 @@ class CreateCommunityUITest {
                 .perform(typeText(STRING_TO_BE_TYPED_IN_NAME), closeSoftKeyboard())
         onView(withId(R.id.editDescriptionOfCommunity))
             .perform(typeText(STRING_TO_BE_TYPED_IN_DESCRIPTION), closeSoftKeyboard())
-        val communityManager = DataObject.getAllData()
+        val communityManager = DataObject.getAllManager()
 
         // For spinner
         onView(withId(R.id.spinner)).perform(click())
         onData(anything()).atPosition(1).perform(click());
-        onView(withId(R.id.spinner)).check(matches(withSpinnerText(containsString(communityManager[1]))));
+        onView(withId(R.id.spinner)).check(matches(withSpinnerText(containsString(communityManager[1].toString()))));
 
-        onView(withId(R.id.btsave)).perform(click())
+        onView(withId(R.id.btSave)).perform(click())
 
         onView(withId(R.id.alertTitle))
             .inRoot(isDialog())
@@ -85,6 +85,6 @@ class CreateCommunityUITest {
     companion object {
         val STRING_TO_BE_TYPED_IN_NAME = "Coffee"
         val STRING_TO_BE_TYPED_IN_DESCRIPTION = "Community for Mobile and cross-platform developers"
-        val STRING_TO_BE_SELECTED = DataObject.getAllMember()[1]
+        val STRING_TO_BE_SELECTED = DataObject.getAllManager()[1]
     }
 }
