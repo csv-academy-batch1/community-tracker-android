@@ -5,10 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Community(
-    @SerializedName("CommunityId")
-    var id: Int = 0,
-
+data class CommunityRequest(
     @SerializedName("CommunityName")
     var name: String = "",
 
@@ -16,9 +13,4 @@ data class Community(
     var managerId: Int = 0,
 
     @SerializedName("Description")
-    var description: String = ""): Parcelable {
-
-    override fun toString(): String {
-        return ("$name $managerId $description")
-    }
-}
+    var description: String = ""): Parcelable
