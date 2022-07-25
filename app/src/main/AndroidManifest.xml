@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SoftvisionCommunityTracker">
         <activity
+            android:name=".ResourceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManageCommunityActivity"
             android:exported="true"
             android:theme="@style/Theme.SoftvisionCommunityTracker.NoActionBar"

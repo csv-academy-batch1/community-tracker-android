@@ -85,6 +85,6 @@ class CreateCommunityUITest {
     companion object {
         val STRING_TO_BE_TYPED_IN_NAME = "Coffee"
         val STRING_TO_BE_TYPED_IN_DESCRIPTION = "Community for Mobile and cross-platform developers"
-        val STRING_TO_BE_SELECTED = DataObject.getAllMember()[1]
+        val STRING_TO_BE_SELECTED = DataObject.getAllManager()[1]
     }
 }
