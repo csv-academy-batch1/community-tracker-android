@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:padding="10dp"
-            android:hint="@string/community_selection_page"
+            android:hint="@string/community_admin_page"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#9FAFC1"
