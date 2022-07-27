@@ -11,7 +11,7 @@ interface ApiInterface {
      suspend fun addCommunity(@Body community: CommunityRequest): Response<Community>
 
      @PUT("/community/{id}")
-     suspend fun updateCommunities(@Path("id") id: Int, @Body community: Community): Response<Communities>
+     suspend fun updateCommunities(@Path("id") id: Long, @Body community: Community): Response<Communities>
 
      @GET("/community")
      suspend fun getCommunities(): Response<Communities>

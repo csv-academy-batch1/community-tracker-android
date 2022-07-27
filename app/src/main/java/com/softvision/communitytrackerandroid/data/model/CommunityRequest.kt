@@ -10,7 +10,7 @@ data class CommunityRequest(
     var name: String = "",
 
     @SerializedName("CommunityMgrid")
-    var managerId: Int = 0,
+    var managerId: Long = 0,
 
     @SerializedName("Description")
     var description: String = ""): Parcelable

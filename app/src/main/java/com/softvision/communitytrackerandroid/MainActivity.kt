@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.softvision.communitytrackerandroid.adapter.ListCommunityAdapter
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
 //            communityList = DataObject.getCommunityList() as MutableList<Community>
+
             listCommunityAdapter = ListCommunityAdapter(communityList, onItemClick = { position, view ->
                 onItemClick(position, view)
             })
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 val response = ApiHelper.apiInterface.getCommunities()
 
-                if (response.isSuccessful && response.body() != null && response.body()!!.communities.isNotEmpty()) {
+                if (response.isSuccessful && response.body() != null && response.body()!!.communities.isNotEmpty() ) {
                     Log.d(TAG, "$response")
 
                     val communityList = response.body()!!.communities

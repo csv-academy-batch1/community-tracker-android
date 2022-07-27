@@ -21,7 +21,7 @@ import com.softvision.communitytrackerandroid.util.afterTextChanged
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
-private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +29,8 @@ private lateinit var binding: ActivityLoginBinding
      binding = ActivityLoginBinding.inflate(layoutInflater)
      setContentView(binding.root)
 
-        val etUsername = binding.username
-        val etPassword = binding.password
+        val etUsername = binding.etUsername
+        val etPassword = binding.etPassword
         val btnLogin = binding.login
         val pgbLoading = binding.loading
 
@@ -42,6 +42,12 @@ private lateinit var binding: ActivityLoginBinding
 
             // disable login button unless both username / password is valid
             btnLogin.isEnabled = loginState.isUsernameValid == true && loginState.isPasswordValid == true
+            if (loginState.isUsernameValid == true) {
+                etUsername.setBackgroundResource(R.drawable.border)
+            }
+            if (loginState.isPasswordValid == true) {
+                etPassword.setBackgroundResource(R.drawable.border)
+            }
         })
 
         loginViewModel.loginUsernameFormState.observe(this@LoginActivity, Observer {
@@ -49,6 +55,7 @@ private lateinit var binding: ActivityLoginBinding
 
             if (loginUsernameState.isUsernameValid == false) {
                 etUsername.error = getString(R.string.invalid_username)
+                etUsername.setBackgroundResource(R.drawable.border_error)
             }
         })
 
@@ -56,7 +63,8 @@ private lateinit var binding: ActivityLoginBinding
             val loginPasswordState = it ?: return@Observer
 
             if (loginPasswordState.isPasswordValid == false) {
-                etUsername.error = getString(R.string.invalid_username)
+                etPassword.error = getString(R.string.invalid_password)
+                etPassword.setBackgroundResource(R.drawable.border_error)
             }
         })
 
@@ -82,6 +90,7 @@ private lateinit var binding: ActivityLoginBinding
                 etPassword.text.toString()
             )
             loginViewModel.usernameDataChange(etUsername.text.toString())
+
         }
 
         etPassword.apply {

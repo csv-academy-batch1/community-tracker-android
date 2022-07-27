@@ -7,13 +7,13 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Community(
     @SerializedName("CommunityId")
-    var id: Int = 0,
+    var id: Long = 0,
 
     @SerializedName("CommunityName")
     var name: String = "",
 
     @SerializedName("CommunityMgrid")
-    var managerId: Int = 0,
+    var managerId: Long = 0,
 
     @SerializedName("Description")
     var description: String = ""): Parcelable {

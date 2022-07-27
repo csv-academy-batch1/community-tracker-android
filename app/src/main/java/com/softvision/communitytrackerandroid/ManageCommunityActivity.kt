@@ -106,7 +106,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                     editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border)
                 }
 
-                if (manager.id == 0) {
+                if (manager.id == 0L) {
                     spinner.setBackgroundResource(R.drawable.bg_spinner_error)
                 } else {
                     spinner.setBackgroundResource(R.drawable.bg_spinner)
@@ -131,7 +131,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                         description = description,
                     )
                     if (CommunityValidator.validateCommunity(community)) {
-//                        updateCommunity(community)
+                        updateCommunity(community)
                     }
 
                 }
@@ -146,6 +146,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                 editTextNameOfCommunity.setText(selectedCommunity?.name)
                 editDescriptionOfCommunity.setText(selectedCommunity?.description)
                 val index = getSpinnerIndex(communityManager)
+                Log.d("index", "$index")
                 spinner.setSelection(index)
                 tvTitle.setText(R.string.community_update_page)
                 btSave.setText(R.string.update)
@@ -155,7 +156,7 @@ class ManageCommunityActivity : AppCompatActivity() {
 
     fun getSpinnerIndex(communityManager : List<Member>) : Int {
         for (i in communityManager.indices) {
-            if (selectedCommunity?.managerId == communityManager.get(i).id) {
+            if (selectedCommunity?.managerId == communityManager[i].id) {
                 return i
             }
         }
@@ -190,26 +191,31 @@ class ManageCommunityActivity : AppCompatActivity() {
                     }
                     dialog?.show()
                 } else {
-                    Toast.makeText(
-                        this@ManageCommunityActivity,
-                        "Add Community : Failed",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
+                        AlertDialog.Builder(it)
+                    }
+                    builder?.setTitle("Add Community")
+                        ?.setMessage("Failed")
+                    val dialog: AlertDialog? = builder?.create()
+                    dialog?.show()
+
                 }
             } catch (ex: Exception){
                 ex.localizedMessage?.let { Log.e("Error", it) }
-                Toast.makeText(
-                    this@ManageCommunityActivity,
-                    "Add Community : Failed",
-                    Toast.LENGTH_LONG
-                ).show()
+                val builder: AlertDialog.Builder? = this@ManageCommunityActivity.let {
+                    AlertDialog.Builder(it)
+                }
+                builder?.setTitle("Add Community")
+                    ?.setMessage("Failed")
+                val dialog: AlertDialog? = builder?.create()
+                dialog?.show()
             }
         }
     }
 
     fun updateCommunity(community: Community) {
-        /*
-        lifecycleScope.launchWhenCreated {
+
+        /*lifecycleScope.launchWhenCreated {
             try {
                 val response = ApiHelper.apiInterface.updateCommunities(community)
                 if (response.isSuccessful && response.body() != null) {
@@ -240,8 +246,6 @@ class ManageCommunityActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-        }
-
-         */
+        }*/
     }
 }
