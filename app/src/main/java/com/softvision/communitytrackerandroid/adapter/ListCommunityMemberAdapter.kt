@@ -24,7 +24,9 @@ class ListCommunityMemberAdapter (
         val item = dataset[position]
         holder.itemView.apply {
             with(holder.binding){
-
+                tvName.text = item.firstName
+                tvAssignedTo.text = item.assignedTo
+                tvHiredDate.text = item.hiredDate
             }
         }
     }
