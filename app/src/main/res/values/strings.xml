@@ -34,4 +34,5 @@
     <string name="login_failed">"Login failed"</string>
     <string name="login_title">Please log in to your credential.</string>
     <string name="enter">ENTER</string>
+    <string name="no_records_found">No Records Found</string>
 </resources>

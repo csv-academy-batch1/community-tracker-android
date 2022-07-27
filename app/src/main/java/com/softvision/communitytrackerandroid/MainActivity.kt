@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     private  var communityList: MutableList<Community> = mutableListOf()
     private lateinit var listCommunityAdapter: ListCommunityAdapter
+    private lateinit var noCommunitiesFound: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +38,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding) {
+            this@MainActivity.noCommunitiesFound = tvNoCommunityFound
 //            communityList = DataObject.getCommunityList() as MutableList<Community>
-
             listCommunityAdapter = ListCommunityAdapter(communityList, onItemClick = { position, view ->
                 onItemClick(position, view)
             })
@@ -69,13 +71,24 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "$response")
 
                     val communityList = response.body()!!.communities
+                    if (communityList.isEmpty()){
+                        noCommunitiesFound.visibility = View.VISIBLE
+                    }
                     this@MainActivity.communityList.clear()
                     this@MainActivity.communityList.addAll(communityList)
                     listCommunityAdapter.notifyDataSetChanged()
 
 
                 } else {
-                    Toast.makeText(this@MainActivity, "Error on getting community list", Toast.LENGTH_SHORT).show()
+                    val builder: AlertDialog.Builder? = this@MainActivity.let {
+                        AlertDialog.Builder(it)
+                    }
+                    builder?.setTitle("List of Communities")
+                        ?.setMessage("Error")
+                    val dialog: AlertDialog? = builder?.create()
+                    dialog?.show()
+                    noCommunitiesFound.visibility = View.VISIBLE
+//                    Toast.makeText(this@MainActivity, "Error on getting community list", Toast.LENGTH_SHORT).show()
                 }
             }
             catch (e: Exception){
@@ -101,8 +114,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ACTION_ADD_COMMUNITY) {
-            if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == ACTION_ADD_COMMUNITY || requestCode == ACTION_UPDATE_COMMUNITY) {
                 loadCommunity()
             }
         }

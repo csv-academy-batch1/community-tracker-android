@@ -9,7 +9,7 @@ data class CommunityRequest(
     @SerializedName("CommunityName")
     var name: String = "",
 
-    @SerializedName("CommunityMgrid")
+    @SerializedName("CommunityMgrId")
     var managerId: Long = 0,
 
     @SerializedName("Description")
