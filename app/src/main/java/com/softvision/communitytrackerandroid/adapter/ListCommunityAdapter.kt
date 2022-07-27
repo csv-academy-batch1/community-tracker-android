@@ -32,7 +32,7 @@ class ListCommunityAdapter (
                 return ListCommunityViewHolder(binding, onItemClick)
         }
 
-        val colors = DataObject.getColor()
+        private val colors = DataObject.getColor()
         override fun onBindViewHolder(holder: ListCommunityViewHolder, position: Int) {
                 val item = dataset[position]
                 holder.itemView.apply {
