@@ -20,6 +20,7 @@ import com.softvision.communitytrackerandroid.data.DataObject
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
 import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.databinding.ActivityMainBinding
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private  var communityList: MutableList<Community> = mutableListOf()
     private lateinit var listCommunityAdapter: ListCommunityAdapter
     private lateinit var noCommunitiesFound: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +69,11 @@ class MainActivity : AppCompatActivity() {
             try {
                 val response = ApiHelper.apiInterface.getCommunities()
 
-                if (response.isSuccessful && response.body() != null && response.body()!!.communities.isNotEmpty() ) {
+                if (response.isSuccessful && response.body() != null && response.body()!!.communities.isNotEmpty()) {
                     Log.d(TAG, "$response")
 
                     val communityList = response.body()!!.communities
-                    if (communityList.isEmpty()){
+                    if (communityList.isEmpty()) {
                         noCommunitiesFound.visibility = View.VISIBLE
                     } else {
                         noCommunitiesFound.visibility = View.GONE
@@ -79,8 +81,9 @@ class MainActivity : AppCompatActivity() {
                     val sortedCommunityList = communityList.sortedBy { it.id }
 
                     this@MainActivity.communityList.clear()
-                    this@MainActivity.communityList.addAll(sortedCommunityList)
+                    this@MainActivity.communityList.addAll(communityList)
                     listCommunityAdapter.notifyDataSetChanged()
+
                 } else {
                     val builder: AlertDialog.Builder? = this@MainActivity.let {
                         AlertDialog.Builder(it)
@@ -90,14 +93,13 @@ class MainActivity : AppCompatActivity() {
                     val dialog: AlertDialog? = builder?.create()
                     dialog?.show()
                     noCommunitiesFound.visibility = View.VISIBLE
-//                    Toast.makeText(this@MainActivity, "Error on getting community list", Toast.LENGTH_SHORT).show()
                 }
-            }
-            catch (e: Exception){
-                Log.e("Error", e.localizedMessage)
+            } catch (e: Exception) {
+                e.localizedMessage?.let { Log.e("Error", it) }
             }
         }
     }
+
 
     private fun onItemClick(position: Int, view: View) {
         Log.d(TAG, "position $position")
@@ -111,6 +113,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("action", ACTION_UPDATE_COMMUNITY)
             intent.putExtra("community", communityList[position])
             startActivityForResult(intent, ACTION_UPDATE_COMMUNITY)
+
         }
     }
 

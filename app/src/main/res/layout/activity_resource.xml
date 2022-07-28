@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:padding="10dp"
-            android:hint="@string/resource_page"
+            android:text="@string/resource_page"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#9FAFC1"
@@ -35,10 +35,20 @@
             android:textStyle="bold"
             android:layout_weight=".2"/>
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border_search"
+            app:queryBackground="@android:color/transparent"
+            android:layout_marginBottom="15dp"
+            app:queryHint="Search Member"
+            app:iconifiedByDefault="false" />
+">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
@@ -59,7 +69,8 @@
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:gravity="center"
-                            android:layout_column="1" />
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
                         <TextView
                             android:layout_width="200dp"
                             android:text="Assigned To"
@@ -67,7 +78,8 @@
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:gravity="center"
-                            android:layout_column="1"/>
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
                         <TextView
                             android:layout_width="200dp"
                             android:text="Hired Date"
@@ -75,7 +87,38 @@
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:gravity="center"
-                            android:layout_column="1"/>
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="State"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="Job Level ID"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="Project"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
                     </TableRow>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -88,7 +131,6 @@
             </HorizontalScrollView>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

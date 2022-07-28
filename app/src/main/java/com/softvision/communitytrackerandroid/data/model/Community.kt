@@ -15,6 +15,9 @@ data class Community(
     @SerializedName("CommunityMgrId")
     var managerId: Long = 0,
 
+    @SerializedName("CommunityManager")
+    var manager: String = "",
+
     @SerializedName("Description")
     var description: String? = null
 ): Parcelable

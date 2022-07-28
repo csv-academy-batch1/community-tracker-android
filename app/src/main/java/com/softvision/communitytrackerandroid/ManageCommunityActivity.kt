@@ -99,6 +99,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                 val manager = spinner.selectedItem as Manager
                 val description = editDescriptionOfCommunity.text.toString()
 
+
                 if (communityName.isEmpty()) {
                     editTextNameOfCommunity.error = "Required Field"
                     editTextNameOfCommunity.setBackgroundResource(R.drawable.rounded_border_error)
@@ -111,9 +112,7 @@ class ManageCommunityActivity : AppCompatActivity() {
                 } else {
                     spinner.setBackgroundResource(R.drawable.bg_spinner)
                 }
-
                 if (action == MainActivity.ACTION_ADD_COMMUNITY) {
-
                     val communityRequest = CommunityRequest(
                         name = communityName,
                         managerId = manager.id,
@@ -124,7 +123,6 @@ class ManageCommunityActivity : AppCompatActivity() {
                     }
 
                 } else if (action == MainActivity.ACTION_UPDATE_COMMUNITY) {
-
                     val community = Community(
                         id = selectedCommunity!!.id,
                         name = communityName,
@@ -136,7 +134,6 @@ class ManageCommunityActivity : AppCompatActivity() {
                     }
 
                 }
-
 
             }
 

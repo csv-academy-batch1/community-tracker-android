@@ -43,15 +43,12 @@ class ListCommunityAdapter (
                                 imbUpdateCommunity.setOnClickListener { view ->
                                         onItemClick(position, view)
                                 }
-
                         }
-
                 }
         }
 
         override fun getItemCount(): Int {
                 return dataset.size
         }
-
 
 }
