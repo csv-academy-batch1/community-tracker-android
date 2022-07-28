@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
         if (view.id == R.id.cvCommunity) {
             Log.d(TAG, "card is clicked")
             val intent = Intent(this@MainActivity, ResourceActivity::class.java)
+            intent.putExtra("member", communityList[position])
             startActivity(intent)
         } else if (view.id == R.id.imbUpdateCommunity) {
             Log.d(TAG, "Update Button is Clicked")

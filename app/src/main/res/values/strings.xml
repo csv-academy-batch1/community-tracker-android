@@ -38,4 +38,11 @@
 
     <string name="action_java">Java</string>
     <string name="action_dot_net">.NET</string>
+    <string name="assigned_to">Assigned To</string>
+    <string name="name">Name</string>
+    <string name="hired_date">Hired Date</string>
+    <string name="project">Project</string>
+    <string name="job_level">Job Level</string>
+    <string name="state">State</string>
+    <string name="search_member">Search Member</string>
 </resources>
