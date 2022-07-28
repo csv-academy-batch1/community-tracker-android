@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -15,7 +17,10 @@ import com.softvision.communitytrackerandroid.MainActivity
 import com.softvision.communitytrackerandroid.databinding.ActivityLoginBinding
 
 import com.softvision.communitytrackerandroid.R
+import com.softvision.communitytrackerandroid.data.api.ApiHelper
+import com.softvision.communitytrackerandroid.data.api.ApiInterface
 import com.softvision.communitytrackerandroid.util.afterTextChanged
+import tayabas.anthony.retrofitsample.data.api.RetrofitClient
 
 class LoginActivity : AppCompatActivity() {
 
@@ -133,6 +138,35 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_login, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_java -> {
+                Toast.makeText(applicationContext, "Domain: ${ApiHelper.BASE_URL_JAVA}", Toast.LENGTH_LONG).show()
+                ApiHelper.BASE_URL = ApiHelper.BASE_URL_JAVA
+
+                ApiHelper.retrofit = RetrofitClient.getInstance()
+                ApiHelper.apiInterface = ApiHelper.retrofit.create(ApiInterface::class.java)
+                true
+            }
+            R.id.action_dot_net ->{
+                Toast.makeText(applicationContext, "Domain: ${ApiHelper.BASE_URL_DOT_NET}", Toast.LENGTH_LONG).show()
+                ApiHelper.BASE_URL = ApiHelper.BASE_URL_DOT_NET
+
+                ApiHelper.retrofit = RetrofitClient.getInstance()
+                ApiHelper.apiInterface = ApiHelper.retrofit.create(ApiInterface::class.java)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 

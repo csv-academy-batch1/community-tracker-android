@@ -10,6 +10,6 @@ class ApiHelper {
         var BASE_URL = BASE_URL_JAVA
 
         var retrofit = RetrofitClient.getInstance()
-        val apiInterface = retrofit.create(ApiInterface::class.java)
+        var apiInterface = retrofit.create(ApiInterface::class.java)
     }
 }

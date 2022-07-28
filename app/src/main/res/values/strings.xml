@@ -23,7 +23,7 @@
     <string name="required_field">Required Field</string>
     <string name="community_admin_page">Admin Community Page</string>
     <string name="resource_page">Resource Details Page</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -35,4 +35,7 @@
     <string name="login_title">Please log in to your credential.</string>
     <string name="enter">ENTER</string>
     <string name="no_records_found">No Records Found</string>
+
+    <string name="action_java">Java</string>
+    <string name="action_dot_net">.NET</string>
 </resources>
