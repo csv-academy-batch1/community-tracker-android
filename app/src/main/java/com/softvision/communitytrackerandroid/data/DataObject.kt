@@ -53,18 +53,30 @@ object DataObject {
 
     fun getMemberList(): List<Member> {
         return listOf(
-            Member("John Jay Rimorin","Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Hans Gustaf Capiral",  "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Rosemarie Osinsao", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Erwin Daza", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Kirstin Megga Ramos", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Samuel Marvin Augilos", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Bianca ANgela Yap", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Christian Sarzaba", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Lambert Cadalzo", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Rommel John Monsanto", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Brian Baldos", "Lloyd Joseph Miguel", "08/02/2022"),
-            Member("Billy Malbataan", "Lloyd Joseph Miguel", "08/02/2022")
+            Member("John Jay Rimorin","Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", "CSV Boot Camp"),
+            Member("Hans Gustaf Capiral",  "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Rosemarie Osinsao", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Erwin Daza", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Kirstin Megga Ramos", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", " Senior Developer", "Fleet Response"),
+            Member("Samuel Marvin Augilos", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Bianca ANgela Yap", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Christian Sarzaba", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", "CSV Boot Camp"),
+            Member("Lambert Cadalzo", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Rommel John Monsanto", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Brian Baldos", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", ""),
+            Member("Billy Malbataan", "Lloyd Joseph Miguel", "08/02/2022", "Onboarding", "Developer", "Fleet Response")
         )
     }
+/*
+     fun getMemberList2(): List<Member> {
+        return listOf(
+            Member(1, 6, "Rimorin", "John Jay", "", "1/20/2005", 1, 1, true),
+            Member(2, 7, "Rimorin", "John", "Jay", "1/20/2005", 1, 1, true),
+            Member(3, 8, "Capiral", "Hans", "Gustaf", "1/20/2005", 1, 1, true),
+            Member(4, 9, "Osinsao", "Rose", "Marie", "1/20/2005", 1, 1, true),
+            Member(5, 5, "Daza", "Erwin", "Marvin", "1/20/2005", 1, 1, true),
+        )
+    }
+
+*/
 }
