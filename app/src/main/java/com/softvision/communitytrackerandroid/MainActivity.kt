@@ -104,7 +104,9 @@ class MainActivity : AppCompatActivity() {
         if (view.id == R.id.cvCommunity) {
             Log.d(TAG, "card is clicked")
             val intent = Intent(this@MainActivity, ResourceActivity::class.java)
-            startActivity(intent)
+            intent.putExtra("action", ACTION_VIEW_COMMUNITY)
+            intent.putExtra("community", communityList[position])
+            startActivityForResult(intent, ACTION_VIEW_COMMUNITY)
         } else if (view.id == R.id.imbUpdateCommunity) {
             Log.d(TAG, "Update Button is Clicked")
             val intent = Intent(this@MainActivity, ManageCommunityActivity::class.java)
@@ -142,5 +144,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         public val ACTION_ADD_COMMUNITY: Int = 1
         public val ACTION_UPDATE_COMMUNITY: Int = 2
+        public val ACTION_VIEW_COMMUNITY: Int = 3
     }
 }

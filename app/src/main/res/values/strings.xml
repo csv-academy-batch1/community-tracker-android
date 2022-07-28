@@ -38,4 +38,5 @@
 
     <string name="action_java">Java</string>
     <string name="action_dot_net">.NET</string>
+    <string name="search">Search Member</string>
 </resources>
