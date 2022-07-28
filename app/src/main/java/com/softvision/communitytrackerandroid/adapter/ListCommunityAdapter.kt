@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.softvision.communitytrackerandroid.data.DataObject
 import com.softvision.communitytrackerandroid.data.model.Community
 import com.softvision.communitytrackerandroid.databinding.ItemCommunityBinding
 import java.util.*
@@ -26,23 +27,12 @@ class ListCommunityAdapter (
                 this.isAdmin = isAdmin
         }
 
-        private val colors = arrayOf(
-                Color.parseColor("#ffc581"),
-                Color.parseColor("#ffa382"),
-                Color.parseColor("#ff8a84"),
-                Color.parseColor("#f06e9c"),
-                Color.parseColor("#d756f6"),
-                Color.parseColor("#8b51f5"),
-                Color.parseColor("#aedd94"),
-                Color.parseColor("#75a9f9"),
-                Color.parseColor("#4dd7fa")
-        )
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListCommunityViewHolder {
                 val binding = ItemCommunityBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 return ListCommunityViewHolder(binding, onItemClick)
         }
 
+        private val colors = DataObject.getColor()
         override fun onBindViewHolder(holder: ListCommunityViewHolder, position: Int) {
                 val item = dataset[position]
                 holder.itemView.apply {

@@ -1,13 +1,11 @@
 package com.softvision.communitytrackerandroid.data.model
 
-import com.google.gson.annotations.SerializedName
-
 data class Member(
-    val id: Int,
-    val name: String) {
+    val firstName: String,
+    val assignedTo: String,
+    val hiredDate: String,
+    val state: String,
+    val jobLevelId: String,
+    val project: String
 
-    override fun toString(): String {
-        return name
-    }
-}
-
+)

@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class Communities(
     @SerializedName("Communities")
-    val communities: List<Community>,) {
-}
+
+    val communities: List<Community> )

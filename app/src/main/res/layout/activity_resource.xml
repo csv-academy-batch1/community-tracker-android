@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResourceActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="270dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cognizant_logo"
+            android:layout_weight=".3"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:padding="10dp"
+            android:text="@string/resource_page"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#9FAFC1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_weight=".2"/>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border_search"
+            app:queryBackground="@android:color/transparent"
+            android:layout_marginBottom="15dp"
+            app:queryHint="Search Member"
+            app:iconifiedByDefault="false" />
+">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="400dp"
+                    android:stretchColumns="1,2,3">
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="Name"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="Assigned To"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="Hired Date"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="State"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="Job Level ID"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="Project"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"
+                            android:background="@drawable/table_view_border"/>
+                    </TableRow>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvListCommunityMember"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_community_member"/>
+                </TableLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

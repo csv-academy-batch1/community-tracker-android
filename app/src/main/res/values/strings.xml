@@ -17,8 +17,25 @@
     <string name="community_Title">Community</string>
     <string name="CommunityName">Community Name</string>
     <string name="community_selection_page">Community Selection Page</string>
-    <string name="listCommunity">List of Commnunity</string>
+    <string name="listCommunity">List of Community</string>
     <string name="community_update_page">Community Update Page</string>
     <string name="update">UPDATE</string>
     <string name="required_field">Required Field</string>
+    <string name="community_admin_page">Admin Community Page</string>
+    <string name="resource_page">Resource Details Page</string>
+    <string name="title_activity_login">Login</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Username must be Email</string>
+    <string name="invalid_password">Password is Required</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_title">Please log in to your credential.</string>
+    <string name="enter">ENTER</string>
+    <string name="no_records_found">No Records Found</string>
+
+    <string name="action_java">Java</string>
+    <string name="action_dot_net">.NET</string>
 </resources>
