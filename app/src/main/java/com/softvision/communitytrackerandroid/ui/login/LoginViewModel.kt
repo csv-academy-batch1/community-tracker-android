@@ -8,6 +8,7 @@ import com.softvision.communitytrackerandroid.data.LoginRepository
 import com.softvision.communitytrackerandroid.data.Result
 
 import com.softvision.communitytrackerandroid.R
+import com.softvision.communitytrackerandroid.data.model.LoginResponse
 import com.softvision.communitytrackerandroid.ui.login.state.LoginFormState
 import com.softvision.communitytrackerandroid.ui.login.state.LoginResult
 
@@ -30,9 +31,9 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         val result = loginRepository.login(username, password)
 
         if (result is Result.Success) {
-            _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+            _loginResult.value = LoginResult(success = result.data)
         } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            _loginResult.value = LoginResult(error = true)
         }
     }
 

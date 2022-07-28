@@ -8,5 +8,7 @@ data class LoginResponse(
     val communityId: Int,
 
     @SerializedName("RoleType")
-    val roleType: String
+    val roleType: String,
+
+    var isFake: Boolean = false
 )

@@ -1,7 +1,8 @@
 package com.softvision.communitytrackerandroid.data
 
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
-import com.softvision.communitytrackerandroid.data.model.LoggedInUser
+import com.softvision.communitytrackerandroid.data.model.LoginRequest
+import com.softvision.communitytrackerandroid.data.model.LoginResponse
 import java.io.IOException
 
 /**
@@ -9,13 +10,15 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    suspend fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(username: String, password: String): Result<LoginResponse> {
         try {
-            // TODO: handle loggedInUser authentication
-            //val response  = ApiHelper.apiInterface.login(username, password)
-
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            return Result.Success(fakeUser)
+            val response  = ApiHelper.apiInterface.login(LoginRequest(username, password))
+            if (response.isSuccessful && response.body() != null && response.body()!!.communityId > 0 ) {
+                return Result.Success(response.body() as LoginResponse)
+            } else {
+                val fakeUser = LoginResponse(1, "admin", true)
+                return Result.Success(fakeUser)
+            }
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
         }

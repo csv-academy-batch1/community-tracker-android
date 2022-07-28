@@ -19,6 +19,7 @@ import com.softvision.communitytrackerandroid.databinding.ActivityLoginBinding
 import com.softvision.communitytrackerandroid.R
 import com.softvision.communitytrackerandroid.data.api.ApiHelper
 import com.softvision.communitytrackerandroid.data.api.ApiInterface
+import com.softvision.communitytrackerandroid.data.model.LoginResponse
 import com.softvision.communitytrackerandroid.util.afterTextChanged
 import tayabas.anthony.retrofitsample.data.api.RetrofitClient
 
@@ -71,10 +72,9 @@ class LoginActivity : AppCompatActivity() {
                 val loginResult = it ?: return@Observer
 
                 pgbLoading.visibility = View.GONE
-                if (loginResult.error != null) {
-                    showLoginFailed(loginResult.error)
-                }
-                if (loginResult.success != null) {
+                if (loginResult.error == true) {
+                    showLoginFailed(R.string.login_failed)
+                } else if (loginResult.success != null) {
                     updateUiWithUser(loginResult.success)
                 }
             })
@@ -126,10 +126,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
+    private fun updateUiWithUser(model: LoginResponse) {
+        if (model.isFake) Toast.makeText(applicationContext, "Fake User", Toast.LENGTH_SHORT).show()
 
         setResult(Activity.RESULT_OK)
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
