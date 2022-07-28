@@ -45,7 +45,9 @@
             android:hint="@string/name_of_community"
             android:minHeight="48dp"
             android:padding="10dp"
-            android:layout_weight=".05"/>
+            android:layout_weight=".05"
+            android:inputType="text"
+            android:imeOptions="actionNext" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -68,7 +70,9 @@
             android:hint="@string/community_description"
             android:gravity="start|top"
             android:padding="10dp"
-            android:layout_weight=".40"/>
+            android:layout_weight=".40"
+            android:inputType="textMultiLine"
+            android:imeOptions="actionDone" />
 
         <Button
             android:id="@+id/btSave"

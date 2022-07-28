@@ -59,6 +59,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="#c8d2dc"/>
+            <TextView
+                android:id="@+id/tvNoCommunityFound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/no_records_found"
+                android:textAlignment="center"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:layout_marginStart="2dp"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvListCommunity"
                 android:layout_width="match_parent"
