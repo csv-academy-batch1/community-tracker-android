@@ -19,6 +19,9 @@ class ResourceActivity : AppCompatActivity() {
         binding = ActivityResourceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // TODO Apply community name in to title
+        // "$selectedCommunity.name\'s Resource Detail Page"
+
         with(binding) {
             rvListCommunityMember.apply {
                 adapter = ListCommunityMemberAdapter(DataObject.getMemberList())

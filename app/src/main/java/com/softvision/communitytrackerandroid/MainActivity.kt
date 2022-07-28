@@ -73,12 +73,14 @@ class MainActivity : AppCompatActivity() {
                     val communityList = response.body()!!.communities
                     if (communityList.isEmpty()){
                         noCommunitiesFound.visibility = View.VISIBLE
+                    } else {
+                        noCommunitiesFound.visibility = View.GONE
                     }
+                    val sortedCommunityList = communityList.sortedBy { it.id }
+
                     this@MainActivity.communityList.clear()
-                    this@MainActivity.communityList.addAll(communityList)
+                    this@MainActivity.communityList.addAll(sortedCommunityList)
                     listCommunityAdapter.notifyDataSetChanged()
-
-
                 } else {
                     val builder: AlertDialog.Builder? = this@MainActivity.let {
                         AlertDialog.Builder(it)

@@ -16,9 +16,5 @@ data class Community(
     var managerId: Long = 0,
 
     @SerializedName("Description")
-    var description: String = ""): Parcelable {
-
-    override fun toString(): String {
-        return ("$name $managerId $description")
-    }
-}
+    var description: String? = null
+): Parcelable
