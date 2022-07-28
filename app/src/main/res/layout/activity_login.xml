@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ivLogo"/>
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="@string/prompt_email"
@@ -50,13 +50,16 @@
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
             android:minHeight="48dp"
+            android:background="@drawable/border"
+            android:layout_marginTop="30dp"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -67,10 +70,12 @@
             android:inputType="textPassword"
             android:selectAllOnFocus="true"
             android:minHeight="48dp"
+            android:padding="10dp"
+            android:background="@drawable/border"
             app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/btn_login"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -87,7 +92,7 @@
             app:layout_constraintVertical_bias="0.2" />
 
         <ProgressBar
-            android:id="@+id/loading"
+            android:id="@+id/pgb_loading"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
