@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                 val loginUsernameState = it ?: return@Observer
 
                 if (loginUsernameState.isUsernameValid == false) {
-                    etUsername.error = getString(R.string.invalid_username)
+                    etUsername.error = getString(R.string.invalid_usernameError)
                     etUsername.setBackgroundResource(R.drawable.border_error)
                 } else {
                     etUsername.setBackgroundResource(R.drawable.border)
