@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#EDF0F4</color>
     <color name="grey">#9FAFC1</color>
+    <color name="login_button_disable_color">#9FAFC1</color>
+    <color name="login_button_default_color">#29323d</color>
+    <color name="login_button_pressed_color">#9929323d</color>
 </resources>

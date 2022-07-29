@@ -30,6 +30,7 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Username must be Email</string>
+    <string name="invalid_usernameError">Username is Required</string>
     <string name="invalid_password">Password is Required</string>
     <string name="login_failed">"Login failed"</string>
     <string name="login_title">Please log in to your credential.</string>
@@ -38,4 +39,11 @@
 
     <string name="action_java">Java</string>
     <string name="action_dot_net">.NET</string>
+    <string name="assigned_to">Assigned To</string>
+    <string name="name">Name</string>
+    <string name="hired_date">Hired Date</string>
+    <string name="project">Project</string>
+    <string name="job_level">Job Level</string>
+    <string name="state">State</string>
+    <string name="search_member">Search Member</string>
 </resources>

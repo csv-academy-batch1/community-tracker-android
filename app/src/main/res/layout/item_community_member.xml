@@ -2,7 +2,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="1,2,3">
+    android:stretchColumns="1,2,3,4,5,6">
     <TableRow>
         <TextView
             android:layout_width="200dp"
@@ -12,6 +12,10 @@
             android:padding="10dp"
             android:layout_gravity="center"
             android:layout_column="1"/>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="#58d9fa"/>
         <TextView
             android:layout_width="200dp"
             android:id="@+id/tvAssignedTo"
@@ -20,6 +24,10 @@
             android:padding="10dp"
             android:layout_gravity="center"
             android:layout_column="1"/>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="#58d9fa"/>
         <TextView
             android:layout_width="200dp"
             android:id="@+id/tvHiredDate"
@@ -28,5 +36,45 @@
             android:padding="10dp"
             android:layout_gravity="center"
             android:layout_column="1"/>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="#58d9fa"/>
+        <TextView
+            android:layout_width="200dp"
+            android:id="@+id/tvState"
+            android:text="ID"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:layout_column="1"/>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="#58d9fa"/>
+        <TextView
+            android:layout_width="200dp"
+            android:id="@+id/tvJobLevel"
+            android:text="ID"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:layout_column="1"/>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="#58d9fa"/>
+        <TextView
+            android:layout_width="200dp"
+            android:id="@+id/tvProject"
+            android:text="ID"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:layout_column="1"/>
     </TableRow>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#58d9fa"/>
 </TableLayout>
