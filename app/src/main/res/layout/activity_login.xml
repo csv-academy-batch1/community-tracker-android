@@ -84,7 +84,7 @@
             android:enabled="false"
             android:text="@string/enter"
             android:textColor="@color/white"
-            android:backgroundTint="#29323d"
+            android:backgroundTint="@color/button_background_state"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

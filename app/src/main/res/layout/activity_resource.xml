@@ -25,26 +25,42 @@
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="30dp"
+            android:autoSizeTextType="uniform"
             android:padding="10dp"
             android:hint="@string/resource_page"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#9FAFC1"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_weight=".2"/>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_background"
+            app:closeIcon="@android:drawable/ic_menu_close_clear_cancel"
+            app:searchIcon="@android:drawable/ic_search_category_default"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="@string/search_member"
+            app:iconifiedByDefault="false"
+            android:layout_weight=".01"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border"
+            android:background="@drawable/table_border"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
+
             <HorizontalScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp">
 
                 <TableLayout
                     android:layout_width="wrap_content"
@@ -52,32 +68,80 @@
                     android:stretchColumns="1,2,3">
 
                     <TableRow>
+
                         <TextView
                             android:layout_width="200dp"
-                            android:text="Name"
+                            android:text="@string/name"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:gravity="center"
                             android:layout_column="1" />
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:background="#58d9fa"/>
                         <TextView
                             android:layout_width="200dp"
-                            android:text="Assigned To"
+                            android:text="@string/assigned_to"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:gravity="center"
                             android:layout_column="1"/>
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:background="#58d9fa"/>
                         <TextView
                             android:layout_width="200dp"
-                            android:text="Hired Date"
+                            android:text="@string/hired_date"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"/>
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:background="#58d9fa"/>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="@string/state"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"/>
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:background="#58d9fa"/>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="@string/job_level"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_column="1"/>
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:background="#58d9fa"/>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:text="@string/project"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:padding="10dp"
                             android:gravity="center"
                             android:layout_column="1"/>
                     </TableRow>
-
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="#58d9fa"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvListCommunityMember"
                         android:layout_width="match_parent"
