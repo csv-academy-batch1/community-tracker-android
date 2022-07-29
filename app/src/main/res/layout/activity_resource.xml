@@ -40,6 +40,8 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_background"
             app:closeIcon="@android:drawable/ic_menu_close_clear_cancel"
             app:searchIcon="@android:drawable/ic_search_category_default"
             app:queryBackground="@android:color/transparent"
